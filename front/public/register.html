@@ -1,0 +1,47 @@
+<div id="container">
+    <div id="registerCard">
+        <form id="registerForm" onsubmit="register(event)">
+            <div class="divBorder">
+                <div class="row">
+                    <div class="col-6 field">
+                        <label for="firstName"><b>Adınız</b></label>
+                        <input type="text" name="firstName" class="inputBox" required>
+                    </div>
+                    <div class="col-6 field">
+                        <label for="lastName"><b>Soyadınız</b></label>
+                        <input type="text" name="lastName" class="inputBox" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 field">
+                        
+                        <label for="email" style="margin-top: 5px; margin-bottom: 5px;"><b>E-postanızı
+                                giriniz</b></label>
+                        <input type="email" name="email" class="inputBox" required>
+                    </div>
+                    <div class="col-12 field">
+                        <label for="password" style="margin-top: 5px; margin-bottom: 5px;"><b>Şifre
+                                oluşturun</b></label>
+                        <input type="password" name="password" class="inputBox" required>
+                    </div>
+                    <div class="col-12 field">
+                        <label for="controlPassword" style="margin-top: 5px; margin-bottom: 5px;"><b>Şifreyi tekrar
+                                giriniz</b></label>
+                        <input type="password" name="controlPassword" class="inputBox" required>
+                    </div>
+                    <div class="col-12 field">
+                        <button type="submit" class="btn-submit"
+                            style="margin-top: 15px; margin-bottom: 5px;">Kaydol</button>
+                    </div>
+                    <div class="col-12 field" style="align-items: center;">veya</div>
+                    <div class="col-12 field">
+                        <button type="button" class="btn-log-in login-text">
+                                Hesabına Giriş mi Yapacaksın ?
+                                Giriş Yap
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

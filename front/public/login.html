@@ -1,0 +1,46 @@
+<div id="login-bottom" style="padding: auto;">
+    <div class="login-bottom-left">
+        <div class="dp-block">
+            <form id="loginform" onsubmit="login(event);">
+                <div class="bottom-list">
+                    <label for="email " style="margin-bottom: 5px; font-size: 1.5rem;"><b>&nbsp&nbsp E-posta veya telefon</b> </label>
+                    <input type="email" name="email" class="btn-bottom inputField" required>
+                </div>
+                <div class="bottom-list">
+                    <label for="password" style="margin-bottom: 5px; font-size: 1.5rem;"><b>&nbsp&nbsp Şifre</b> </label>
+                    <input autocomplete="on" type="password" name="password" class="btn-bottom" id="password" required>
+
+                </div>
+                <div class="bottom-list shw" style="font-size: 1.2rem;">
+                    <input type="checkbox" onclick="showPassword()" class="chechbox" >Şifreyi Göster
+                </div>
+                <div class="bottom-list list-2">
+
+                    <span>
+                        <a class="list-2" href="#" style="font-size: 1.2rem;">
+                            Şifrenizi Sıfırlayın
+                        </a>
+                    </span>
+                </div>
+                <div class="bottom-list list-3 " >
+                    <button type="submit" class="btn-log-in login-text" style="width: 400px;">
+                        Oturum aç
+                    </button>
+                </div>
+            </form>
+
+            <div class="bottom-list list-3">
+                <span style="font-size: 1.4rem;" >veya</span>
+            </div>
+            <div class="bottom-list ">
+                <button type="button" class="btn-google login-text">Google İle Giriş Yapın</button>
+            </div>
+            <div class="bottom-list ">
+                <button type="button" class="btn-google btn-lnk login-text">LinkedIn'de yeni misin Hemen Katıl!</button>
+            </div>
+        </div>
+    </div>
+    <div class="login-bottom-right" style="padding-left: 2rem; ">
+        <img src="assets/workingman.svg " style="height: 600px;">
+    </div>
+</div>

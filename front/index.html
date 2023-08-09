@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="styles/login.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="styles/register.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="styles/styles.css" type="text/css" media="screen">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="scripts/feed.js"></script>
+    <script src="scripts/login.js"></script>
+    <script src="scripts/register.js"></script>
+    <script src="scripts/url-router.js"></script>
+    <title></title>
+    <meta name="description" content="">
+</head>
+
+<body>
+
+    <div id="main">
+        <div id="global-top-wrapper">
+            <div id="top">
+                <div id="top-left">
+                    <a href="/homepage" onclick="urlRoute()"  class="btn btn-npadding nborder nav-btn">
+                        <img class="linkedin-logo" src="assets/linkedin-logo.svg" />
+                    </a>
+                    <div id="box">
+                        <input type="text" id="search" placeholder="Ara..">
+                        <i class="fa fa-search"></i>
+                    </div>
+                </div>
+                <div id="top-right">
+
+                    <a href="/feed" onclick="urlRoute()" class="btn nav-btn">
+                        <i class="fa-solid fa-house-chimney"></i>
+                        Ana Sayfa
+                    </a>
+                    <a href="https://www.linkedin.com/mynetwork/" class="btn nav-btn">
+                        <i class="fa-solid fa-user-group"></i>
+                        Ağım
+                    </a>
+                    <a href="https://www.linkedin.com/jobs/" class="btn nav-btn">
+                        <i class="fa-solid fa-briefcase"></i>
+                        İş İlanları
+                    </a>
+                    <a href="https://www.linkedin.com/messaging/thread/2-MTQzODNmMDEtYzc1NS00MTFiLTg3OTUtMWQxMTBlOGE3Yjk0XzAxMw==/" class="btn nav-btn">
+                        <i class="fa-solid fa-comments"></i>
+                        Mesajlaşma
+                    </a>
+                    <a href="https://www.linkedin.com/notifications/?filter=all" class="btn nav-btn">
+                        <i class="fa-solid fa-bell"></i>
+                        Bildirimler
+                    </a>
+                    
+                    <a href="ben" class="btn ">
+                        <div>
+                            <img class="i-photo" src="assets/photo2.jpeg">
+                        </div>
+                        <div>
+                            Ben
+                            <i class="fa-solid fa-caret-down" style="font-size: inherit;"></i>
+                        </div>
+                    </a>
+                    <div id="vertical">
+                    </div>
+                    <a href="isicin" class="btn nav-btn" style="margin-right: 1rem;">
+                        <i class="fa-solid fa-square"></i>
+                        <div>
+                            İş İçin
+                            <i class="fa-solid fa-caret-down" style="font-size: inherit;"></i>
+                        </div>
+                    </a>
+                    <a href="https://www.linkedin.com/job-posting/?trk=nav_spotlight_post_job&" class="btn text-decoration-underline nav-btn" id="ssa" style="margin-right: 1rem;">
+                         Premium'u ücretsiz <br> deneyin.
+                        
+                    </a>
+                    <a href="/login" onclick="urlRoute()" class="btn nav-btn">
+                        <i class="fa-solid fa-right-to-bracket"></i>Oturum Aç
+                    </a>
+                    <a href="/register"onclick="urlRoute()" class="btn nav-btn" >
+                        <i class="fa-solid fa-rupee-sign"></i>Kaydol</a>
+                </div>
+            </div>
+        </div>
+        <div id="content"></div>
+    </div>
+</body>
+
+</html>
