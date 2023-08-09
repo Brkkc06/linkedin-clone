@@ -18,7 +18,6 @@ app.get('/',(req,res)=>{
 });
 
 app.post('/addUser',(req,res) => {
-    
     var newUser = new User();
     newUser.email =  "brk.kc.06@icloud.com";
     newUser.firstName = "Burak";
