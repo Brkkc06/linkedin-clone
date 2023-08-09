@@ -13,14 +13,27 @@ function register(e) {
         registerForm = document.getElementById('registerForm')
     
         inputPassword = registerForm.elements.password.value
-        inputcontrolPassword = registerForm.elements.controlPassword.value
+        inputControlPassword = registerForm.elements.controlPassword.value
     
-        if (inputcontrolPassword === inputPassword) {
+        if (inputControlPassword === inputPassword) {
             inputEmail = registerForm.elements.email.value;
             inputfirstName = registerForm.elements.firstName.value
             inputlastName = registerForm.elements.lastName.value
             newUser = new User(inputEmail = registerForm.elements.email.value, inputPassword = registerForm.elements.password.value, inputfirstName = registerForm.elements.firstName.value, inputlastName = registerForm.elements.lastName.value);
-            console.log(newUser);
+            fetch("http://127.0.0.1:3000/addUser", {
+                method: "POST",
+
+                headers : {
+                    "Content-type":"application/json"
+                },
+                body:JSON.stringify({
+                    newUser: newUser,
+                })
+            })
+                .then((data) => data.text())
+                .then(res => {
+                    console.log(res)
+                })
         }
         else {
             alert("girdiğiniz  şifreler yanlış");

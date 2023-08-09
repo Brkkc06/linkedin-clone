@@ -162,6 +162,8 @@
 }
 #loginform input {
     padding-left: 20px;
+    font-size: 1.4rem;
+
 }
 .login-text{
     font-size: 1.6rem;

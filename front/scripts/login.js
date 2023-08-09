@@ -44,17 +44,23 @@ function login(e) {
     e.preventDefault()
 
     loginform = document.getElementById('loginform')
-
     inputEmail = loginform.elements.email.value
     inputPassword = loginform.elements.password.value
 
-    // dbPass = db.getPasswordByEmail(inputEmail)
-    dbPass = '123'
+    fetch("http://127.0.0.1:3000/login", {
+        method: "POST",
 
-    if (dbPass === inputPassword) {
-        alert('dogru şifre ve eposta')
-    } else {
-        alert('yanlıs şifre veya eposta')
-    }
+        headers : {
+            "Content-type":"application/json"
+        },
+        body:JSON.stringify({
+           email :inputEmail ,
+           password :inputPassword
+        })
+    }).then(response => {
+        
+        response.text().then(text=>alert(text))
+        
+    })
 }
 
