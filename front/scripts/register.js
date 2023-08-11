@@ -30,9 +30,10 @@ function register(e) {
                     newUser: newUser,
                 })
             })
-                .then((data) => data.text())
+                .then((response) => response.text())
                 .then(res => {
-                    console.log(res)
+                    alert(res)
+                    
                 })
         }
         else {

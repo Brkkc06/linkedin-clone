@@ -111,6 +111,8 @@
    font-size: 1.4rem;
    font-weight: 500;
    transition: ease 0.3s;
+   text-decoration: none;
+   text-align: center;
 }
 .btn-submit:hover{
     box-shadow: 2px 2px 2px var(--linkedinlacivert);

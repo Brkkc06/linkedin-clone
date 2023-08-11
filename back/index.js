@@ -23,14 +23,22 @@ app.get('/',(req,res)=>{
 });
 
 app.post('/addUser',(req,res) => {
+    console.log(req.body)
     const newUser = new User(req.body.newUser);
-    newUser.save().then((data)=>{
-        res.send("successfully saved");
+    console.log(newUser)
+    UserModel.create(newUser).then((data)=>{
+        res.status(201).send("successfully saved");
+    }).catch(err => {
+        if (err.keyPattern.email === 1) {
+            res.status(400).send("already registered email: "  + err.keyValue.email);
+        } else {
+            res.status(500).send("error happened");
+        }
     })
 })
 
 app.post("/login",(req,response)=> {
-    User.find({ email: req.body.email }).exec().then(result => {
+    UserModel.find({ email: req.body.email }).exec().then(result => {
         console.log('result:', result)
 
         if(result.length !=0){
@@ -64,14 +72,33 @@ var Schema = mongoose.Schema;
 var userSchema = new Schema({
     firstName : String,
     lastName : String,
-    email :String,
+    email :{
+        type:String,
+        unique:true,
+        
+    },
     password : String,
     // dateCreated : Date,
     // dateUpdated: Date,
     // phoneNumbers : String,
 });
 
-var User = mongoose.model('User',userSchema);
+var UserModel = mongoose.model('User',userSchema);
+
+
+class User {
+    firstName;
+    lastName;
+    email;
+    password;
+
+    constructor(user) {
+        this.firstName = user.firstName;
+        this.lastName = user.lastName;
+        this.email = user.email;
+        this.password = user.password;
+    }
+}
 
 
 

@@ -59,7 +59,10 @@ function login(e) {
         })
     }).then(response => {
         
-        response.text().then(text=>alert(text))
+        response.text().then(text=> {
+            alert(text)
+            
+        })
         
     })
 }
