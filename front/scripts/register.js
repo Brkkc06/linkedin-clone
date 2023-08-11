@@ -31,7 +31,10 @@ function register(e) {
                 })
             })
                 .then((response) => response.text())
-                .then(res => {
+                .then(async (res) => {
+                    window.history.pushState({},"", "/login");
+                    const html = await fetch("/public/login.html").then((response) => response.text());
+                    document.getElementById("content").innerHTML = html;
                     alert(res)
                     
                 })
