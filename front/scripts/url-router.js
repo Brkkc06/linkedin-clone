@@ -30,7 +30,8 @@ const urlRoutes = {
         template:"/public/login.html",
         title: "404 |"+urlPageTitle,
         description:"You are redirected to the login page"
-    }
+    },
+ 
 }
 
 const urlRoute = (event) => {
