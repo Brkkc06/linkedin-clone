@@ -1,0 +1,120 @@
+:root{
+    --bgc:#fff;
+    --linkedinmavisi:#0d6efd;
+    --hoverkremi:#ddd; 
+    --textcolor:#000;
+    --grirenk:rgb(0 0 0 / 60%);
+    --googlered:#de5246 ;
+    --googlegrey:#d2d2d2;
+    --googledarkgrey:#2d2d2d;
+    --linkedinlacivert:#004182;
+    --colorcrema:#FAF3F0;
+    --asd:#FFF0F5;
+    --bodybgc:#f3f2ef;
+}
+
+
+
+.jw-modal {
+    /* modals are hidden by default */
+    display: none;
+
+    /* modal container fixed across whole screen */
+    position: fixed;
+    inset: 0;
+
+    /* z-index must be higher than everything else on the page */
+    z-index: 10000;
+    
+    /* semi-transparent black background exposed by padding */
+    background-color: rgba(0, 0, 0, .75);
+    padding: 40px;
+
+    /* enables scrolling for tall modals */
+    overflow: auto;
+}
+.jw-modal.open {
+    display: block;
+}
+.jw-modal-body {
+    width:50%;
+    background: #fff;
+    height: 90%;
+    margin: auto;
+    border-radius: 5px;
+   
+    
+}
+.modalInput{
+    display: flex;
+    margin-bottom: 5px;
+    font-size: 2rem;
+    width: 100%;
+    border:none;
+    padding-left: 15px;
+    padding-right: 15px;
+    outline: none;
+
+}
+.modalPhoto img{
+    border-radius: 50%;
+    object-fit: cover;
+    width: 5.6rem;
+    height: 5.6rem;
+}
+.photoCard{
+    display: flex;
+    width: 744px;
+}
+.modalPhoto{
+    display: flex;
+
+}
+.modalProfileInfo{
+    margin-left: 0.4rem;
+    padding-left: 0.8rem;
+    align-self: center;
+}
+.fa-xmark{
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    font-size: 2.4rem;
+    align-items: center;
+    color:var(--googledarkgrey)
+}
+.modalCrossIcon i:hover{
+    border-radius: 50%;
+    background-color: var(--bodybgc);
+}
+.modalCrossIcon{
+    padding-left: 15rem;
+}
+.btnModals{
+    display: flex;
+    border: none;
+    padding: 0.8rem;
+    background-color: #fff;
+}
+.btnModals:hover{
+    background-color: var(--bodybgc);
+}
+.smileFaceEmoji a i {
+    font-size: 2.5rem;
+
+}
+.smileFaceEmoji{
+    padding-left: 1.5rem;
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin:0;
+}
+.smileFaceEmoji a{
+    width: 4rem;
+    height: 4rem;
+}

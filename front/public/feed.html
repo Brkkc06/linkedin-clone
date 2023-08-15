@@ -157,11 +157,74 @@
                             <img class="post-photo-style" src="assets/post-photo.jpg">
                         </div>
                     </a>
-                    <button type="button" class="btn btn-post">
-                        <span class="btn-post-text">
-                            Gönderi başlat
-                        </span>
+                    <button type="button" class="btn btn-post btn-post-text" onclick="openModal()" id="modalButton">
+                        Gönderi başlat
                     </button>
+                    <div id="modal-1" class="jw-modal">
+                        <div class="jw-modal-body">
+                            <div
+                                style="display: flex; justify-content: space-between;  padding: 1.6rem 4.8rem 1.6rem 2.4rem;">
+                                <div class="photoCard">
+                                    <div class="modalPhoto">
+                                        <button class="btnModals">
+                                            <img src=/assets/profile-photo-left.jpeg>
+                                            <div class="modalProfileInfo">
+                                                <span
+                                                    style="font-size: 2rem; font-weight: 600; line-height: 1.25; display: grid; text-align: left;">
+                                                    Burak KOÇ
+                                                </span>
+                                                <span
+                                                    style="font-size: 1.4rem; line-height: 1.428; font-weight: 400; text-align: left; ">
+                                                    Herhangi biri gönderisi
+                                                </span>
+
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <button class="modalCrossIcon" onclick="closeModal()"
+                                    style=" background-color: #fff; border:none; width: 4rem; height: 4rem; ">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </button>
+
+
+                            </div>
+                            <label for="modalText" style="margin-bottom: 5px; font-size: 1.5rem;"></label>
+                            <textarea rows="8" cols="60" type="text" placeholder="Ne hakkında konuşmak istiyorsunuz ?"
+                                name="modalText" class="modalInput" style="resize:none"></textarea>
+
+
+                            <div>
+                                <div class="smileFaceEmoji">
+                                    <a>
+                                        <i class="fa-regular fa-face-smile"></i>
+                                    </a>
+                                </div>
+
+
+
+
+
+
+
+                                <div>
+                                    <ul class="modalShareIcon">
+                                        <a></a>
+                                        <a></a>
+                                        <a></a>
+                                        <a></a>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+
+
                 </div>
                 <div class="post-toolbar">
                     <button type="button" class="btn btn-toolbar">
