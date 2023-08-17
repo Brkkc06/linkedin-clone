@@ -58,33 +58,17 @@ app.post("/login",(req,response)=> {
 
 
 
-
-
-
-
-
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-  })
-
-var Schema = mongoose.Schema;
-
-var userSchema = new Schema({
+const userSchema = new mongoose.Schema({
     firstName : String,
     lastName : String,
     email :{
         type:String,
         unique:true,
-        
     },
     password : String,
-    // dateCreated : Date,
-    // dateUpdated: Date,
-    // phoneNumbers : String,
 });
 
-var UserModel = mongoose.model('User',userSchema);
-
+const UserModel = mongoose.model('User',userSchema);
 
 class User {
     firstName;
@@ -101,4 +85,37 @@ class User {
 }
 
 
+class Post {
+    constructor(createdBy,text){
+        this.createdBy = createdBy,
+        this.text = text
+    }
+    
+}
 
+
+const postSchema = new mongoose.Schema({
+    createdBy:String,
+    text:String,
+});
+const PostModel = mongoose.model('Post',postSchema);
+
+
+
+
+
+app.post('/addPost',(req,res) => {
+     console.log(req.body)
+     const newPost = new Post(req.body.newPost.createdBy,req.body.newPost.text);
+     console.log(newPost)
+     PostModel.create(newPost).then((data)=>{
+       res.status(201).send("successfully shared");
+    })
+    
+})
+
+
+
+app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`)
+})

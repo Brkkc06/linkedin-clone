@@ -162,8 +162,7 @@
                     </button>
                     <div id="modal-1" class="jw-modal">
                         <div class="jw-modal-body">
-                            <div
-                                style="display: flex; justify-content: space-between;  padding: 1.6rem 4.8rem 1.6rem 2.4rem;">
+                            <div style="display: flex; justify-content: space-between;  padding: 1.6rem 4.8rem 1.6rem 2.4rem;">
                                 <div class="photoCard">
                                     <div class="modalPhoto">
                                         <button class="btnModals">
@@ -173,71 +172,73 @@
                                                     style="font-size: 2rem; font-weight: 600; line-height: 1.25; display: grid; text-align: left;">
                                                     Burak KOÇ
                                                 </span>
-                                                <span
-                                                    style="font-size: 1.4rem; line-height: 1.428; font-weight: 400; text-align: left; ">
+                                                <span style="font-size: 1.4rem; line-height: 1.428; font-weight: 400; text-align: left; ">
                                                     Herhangi biri gönderisi
                                                 </span>
-
+                    
                                             </div>
                                         </button>
                                     </div>
                                 </div>
-
+                    
                                 <button class="modalCrossIcon" onclick="closeModal()"
                                     style=" background-color: #fff; border:none; width: 4rem; height: 4rem; ">
                                     <i class="fa-solid fa-xmark"></i>
                                 </button>
-
-
+                    
+                    
                             </div>
-                            <label for="modalText" style="margin-bottom: 5px; font-size: 1.5rem;"></label>
-                            <textarea rows="8" cols="60" type="text" placeholder="Ne hakkında konuşmak istiyorsunuz ?"
-                                name="modalText" class="modalInput" style="resize:none"></textarea>
-
-
-                            <div>
-                                <div class="smileFaceEmoji" style="padding-left: 5px;">
-                                    <a href="#">
-                                        <i class="fa-regular fa-face-smile"></i>
-                                    </a>
-                                </div>
-
+                            <form id="postForm" onsubmit="sharePost(event)">
+                                <label for="modalText" style="margin-bottom: 5px; font-size: 1.5rem;"></label>
+                                <textarea rows="8" cols="60" type="text" placeholder="Ne hakkında konuşmak istiyorsunuz ?" name="modalText"
+                                    class="modalInput" id="modalInput" style="resize:none"></textarea>
+                    
+                    
                                 <div>
-                                    <ul class="modalShareIcon">
-                                        <li>
-                                            <a>
-                                                <i class="fa-regular fa-image"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa-solid fa-video"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa-solid fa-calendar-days"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa-solid fa-ellipsis"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
+                                    <div class="smileFaceEmoji" style="padding-left: 5px;">
+                                        <a href="#">
+                                            <i class="fa-regular fa-face-smile"></i>
+                                        </a>
+                                    </div>
+                    
+                                    <div>
+                                        <ul class="modalShareIcon">
+                                            <li>
+                                                <a>
+                                                    <i class="fa-regular fa-image"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <i class="fa-solid fa-video"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <i class="fa-solid fa-calendar-days"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <i class="fa-solid fa-ellipsis"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div> 
-                            <!--Burada KALDIM -->
-                            <div class="modalBottomDiv">
-                                <button type="button" class="clockButton">
-                                    <i class="fa-regular fa-clock"></i>
-                                </button>
-                                <button type="submit" class="ShareButton">
-                                    Paylaş
-                                </button>
-                            </div>
+                    
+                                <div class="modalBottomDiv">
+                    
+                                    <button type="button" class="clockButton">
+                                        <i class="fa-regular fa-clock"></i>
+                                    </button>
+                                    <button disabled type="submit" class="ShareButton" id="ShareButton">
+                                        Paylaş
+                                    </button>
+                            </form>
                         </div>
-                            <!--Burada KALDIM -->
+                    </div>
+
                     </div>
 
 

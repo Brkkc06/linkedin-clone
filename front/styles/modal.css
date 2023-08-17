@@ -212,9 +212,14 @@
     background-color: var(--linkedinmavisi);
     color: var(--bgc);
     transition: ease 0.3s;
+    cursor:not-allowed;
 }
 
 .ShareButton:hover {
     background-color: var(--linkedinlacivert);
     color: var(--bgc);
+}
+
+.ShareButton:disabled{
+    background-color:var(--hoverkremi);
 }
