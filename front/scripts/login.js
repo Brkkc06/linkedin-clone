@@ -59,8 +59,9 @@ function login(e) {
         })
     }).then(response => {
         
-        response.text().then(text=> {
-            alert(text)
+        response.json().then(json=> {
+            alert(json.message)
+            sessionStorage.setItem("userId", json.id)
           
         })
         

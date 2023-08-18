@@ -18,10 +18,6 @@ app.use(cors({
     origin: '*'
 }));
 
-app.get('/',(req,res)=>{
-    res.send('Rest Api');
-});
-
 app.post('/addUser',(req,res) => {
     console.log(req.body)
     const newUser = new User(req.body.newUser);
@@ -43,18 +39,37 @@ app.post("/login",(req,response)=> {
 
         if(result.length !=0){
             if( req.body.password != result[0].password ){
-                response.send("Yanlış şifre")
+                response.send({ message: "Yanlış şifre" })
             }
             else{
-                response.send("Başarılı Şekilde Giriş yapıldı")
+                response.send({ message: "Başarılı Şekilde Giriş yapıldı", id: result[0]._id })
             } 
         }
         else{
-            response.send("Kayıtlı olmayan e-posta-şifre")
+            response.send({ message: "Kayıtlı olmayan e-posta-şifre" })
         }
     })
     
 })
+
+
+// app.get("/get-user-1/:id",(req,res) =>{
+//     const id = req.params.id;
+//     console.log(id);
+    
+// })
+app.post("/get-user-2",(req,res)=>{
+    console.log(req.body._id)
+        UserModel.find({ _id: req.body._id, }).exec().then(result => {
+            console.log(result)
+        })
+})
+
+app.get("/getAll", async (req,res) => {
+      const result = await PostModel.find({});
+      res.send({ posts: result })
+      
+    })
 
 
 

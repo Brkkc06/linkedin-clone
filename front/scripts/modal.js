@@ -41,7 +41,7 @@ function sharePost(e){
     inputText = postForm.elements.modalInput.value;
     
 
-    newPost = new Post("",inputText);
+    newPost = new Post(sessionStorage.getItem("userId"), inputText);
     
     fetch("http://127.0.0.1:3000/addPost",{
         method:"POST",

@@ -35,8 +35,9 @@ const urlRoutes = {
 }
 
 const urlRoute = (event) => {
-    event = event || window.event;
+    // event = event || window.event;
     event.preventDefault();
+    console.log(event)
     console.log(event.target)
     window.history.pushState({},"",event.target.href);
     urlLocationHandler();
@@ -44,15 +45,50 @@ const urlRoute = (event) => {
 }
 
 const urlLocationHandler = async () =>{
-    const location = window.location.pathname;
-    if(location.length == 0 ) {
-        location = "feed";
+    let location = window.location.pathname;
+    if(location === "/" ) {
+        location = "/feed";
     }
+    console.log(location)
     const route = urlRoutes[location] || urlRoutes[404];
     const html = await fetch(route.template).then((response) => response.text());
     document.getElementById("content").innerHTML = html;
+   console.log(route.template)
+    if (route.template === "/public/feed.html") {
+        getPosts()
+    }
+
     document.title = route.title;
     document.querySelector('meta[name="description"]').setAttribute("content",route.description);
 }
 
 urlLocationHandler();
+
+
+function getPosts(){
+    fetch("http://127.0.0.1:3000/getAll",{
+        method: "GET",
+        headers:{
+            "Content-type":"application/json"
+        },
+        
+    }).then(res => {
+        res.json().then(async json => {
+            const posts = json.posts;
+            const postsDiv = document.getElementById("posts");
+
+            for (let index = 0; index < posts.length; index++) {
+                const post = posts[index];
+                const postDiv = document.createElement('div');
+                const postHtml = await fetch("/public/post.html").then((response) => response.text());
+                postDiv.innerHTML = postHtml;
+                postsDiv.appendChild(postDiv);
+                postsDiv.getElementsByClassName("zgl")[index].innerHTML = post.createdBy
+            }
+
+            // alert(json.text)
+        }).catch(err => {
+            console.log(err);
+        })
+    })
+}

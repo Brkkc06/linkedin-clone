@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,7 +29,7 @@
         <div id="global-top-wrapper">
             <div id="top">
                 <div id="top-left">
-                    <a href="/homepage" onclick="urlRoute()"  class="btn btn-npadding nborder nav-btn">
+                    <a href="/homepage" onclick="urlRoute(event)" class="btn btn-npadding nborder nav-btn">
                         <img class="linkedin-logo" src="assets/linkedin-logo.svg" />
                     </a>
                     <div id="box">
@@ -38,7 +39,7 @@
                 </div>
                 <div id="top-right">
 
-                    <a href="/feed" onclick="urlRoute()" class="btn nav-btn">
+                    <a href="/feed" onclick="urlRoute(event); return false;" class="btn nav-btn">
                         <i class="fa-solid fa-house-chimney"></i>
                         Ana Sayfa
                     </a>
@@ -50,7 +51,8 @@
                         <i class="fa-solid fa-briefcase"></i>
                         İş İlanları
                     </a>
-                    <a href="https://www.linkedin.com/messaging/thread/2-MTQzODNmMDEtYzc1NS00MTFiLTg3OTUtMWQxMTBlOGE3Yjk0XzAxMw==/" class="btn nav-btn">
+                    <a href="https://www.linkedin.com/messaging/thread/2-MTQzODNmMDEtYzc1NS00MTFiLTg3OTUtMWQxMTBlOGE3Yjk0XzAxMw==/"
+                        class="btn nav-btn">
                         <i class="fa-solid fa-comments"></i>
                         Mesajlaşma
                     </a>
@@ -58,7 +60,7 @@
                         <i class="fa-solid fa-bell"></i>
                         Bildirimler
                     </a>
-                    
+
                     <a href="ben" class="btn ">
                         <div>
                             <img class="i-photo" src="assets/photo2.jpeg">
@@ -77,14 +79,15 @@
                             <i class="fa-solid fa-caret-down" style="font-size: inherit;"></i>
                         </div>
                     </a>
-                    <a href="https://www.linkedin.com/job-posting/?trk=nav_spotlight_post_job&" class="btn text-decoration-underline nav-btn" id="ssa" style="margin-right: 1rem;">
-                         Premium'u ücretsiz <br> deneyin.
-                        
+                    <a href="https://www.linkedin.com/job-posting/?trk=nav_spotlight_post_job&"
+                        class="btn text-decoration-underline nav-btn" id="ssa" style="margin-right: 1rem;">
+                        Premium'u ücretsiz <br> deneyin.
+
                     </a>
-                    <a href="/login" onclick="urlRoute()" class="btn nav-btn">
+                    <a href="/login" onclick="urlRoute(event)" class="btn nav-btn">
                         <i class="fa-solid fa-right-to-bracket"></i>Oturum Aç
                     </a>
-                    <a href="/register"onclick="urlRoute()" class="btn nav-btn" >
+                    <a href="/register" onclick="urlRoute(event)" class="btn nav-btn">
                         <i class="fa-solid fa-rupee-sign"></i>Kaydol</a>
                 </div>
             </div>
