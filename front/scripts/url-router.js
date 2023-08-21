@@ -1,3 +1,4 @@
+
 const urlPageTitle = "JS SPA  Routing";
 
 const urlRoutes = {
@@ -76,12 +77,12 @@ function getPosts() {
         res.json().then(async json => {
             const posts = json.posts;
             const postsDiv = document.getElementById("posts");
-
             for (let index = 0; index < posts.length; index++) {
                 const post = posts[index];
                 const postDiv = document.createElement('div');
                 const postHtml = await fetch("/public/post.html").then((response) => response.text());
                 postDiv.innerHTML = postHtml;
+                
                 if (post.createdBy) {
                     const result = await fetch(`http://127.0.0.1:3000/getUserById/${post.createdBy}`, {
                         method: "GET",
@@ -91,7 +92,10 @@ function getPosts() {
                     });
                     const json = await result.json();
                     const userName = json.user.firstName + '\xa0' +json.user.lastName
+                   
                     Array.from(postDiv.getElementsByClassName("zgl"))[0].innerHTML = userName;
+                    Array.from(postDiv.getElementsByClassName("golf"))[0].innerHTML = post.text;
+                   
                     postsDiv.appendChild(postDiv);
                 }
             }
