@@ -73,6 +73,19 @@ app.get("/getAll", async (req,res) => {
 
 
 
+
+
+
+
+
+
+app.get("/getUserById/:id" , async (req,res) => {
+    
+    const result = await UserModel.findOne({ _id : req.params.id}).exec();
+    res.send({ user: result })
+    
+})
+
 const userSchema = new mongoose.Schema({
     firstName : String,
     lastName : String,
@@ -128,6 +141,9 @@ app.post('/addPost',(req,res) => {
     })
     
 })
+
+
+
 
 
 
