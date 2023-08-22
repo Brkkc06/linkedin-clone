@@ -77,12 +77,12 @@ function getPosts() {
         res.json().then(async json => {
             const posts = json.posts;
             const postsDiv = document.getElementById("posts");
-            for (let index = 0; index < posts.length; index++) {
-                const post = posts[index];
+            for (let index =  posts.length; index > 0; index--) {
+                const post = posts[index - 1];
                 const postDiv = document.createElement('div');
                 const postHtml = await fetch("/public/post.html").then((response) => response.text());
                 postDiv.innerHTML = postHtml;
-                
+
                 if (post.createdBy) {
                     const result = await fetch(`http://127.0.0.1:3000/getUserById/${post.createdBy}`, {
                         method: "GET",
@@ -91,11 +91,20 @@ function getPosts() {
                         },
                     });
                     const json = await result.json();
-                    const userName = json.user.firstName + '\xa0' +json.user.lastName
-                   
+                    const userName = json.user.firstName.charAt(0).toUpperCase() + json.user.firstName.slice(1) + '\xa0' + json.user.lastName.charAt(0).toUpperCase() + json.user.lastName.slice(1);
+                    const userProfilePhoto = json.user.profilePhoto;
+                    const followedByUser = json.user.followedBy + '\xa0' + "Takipçi";
+                    const postMedia = post.media;
+                    const postText = post.text;
                     Array.from(postDiv.getElementsByClassName("zgl"))[0].innerHTML = userName;
-                    Array.from(postDiv.getElementsByClassName("golf"))[0].innerHTML = post.text;
-                   
+                    Array.from(postDiv.getElementsByClassName("golf"))[0].innerHTML = postText;
+                    if (postMedia) {
+                        Array.from(postDiv.getElementsByClassName("post-image"))[0].src = postMedia;
+                    }
+
+                    Array.from(postDiv.getElementsByClassName("img-anka "))[0].src = userProfilePhoto;
+                    Array.from(postDiv.getElementsByClassName("tfn "))[0].innerHTML = followedByUser;
+                    Array.from(postDiv.getElementsByClassName("mre "))[0].innerHTML = moment(new Date(post.createdDate)).fromNow(); ;
                     postsDiv.appendChild(postDiv);
                 }
             }

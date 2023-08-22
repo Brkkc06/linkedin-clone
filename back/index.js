@@ -70,15 +70,6 @@ app.get("/getAll", async (req,res) => {
       res.send({ posts: result })
       
     })
-
-
-
-
-
-
-
-
-
 app.get("/getUserById/:id" , async (req,res) => {
     
     const result = await UserModel.findOne({ _id : req.params.id}).exec();
@@ -94,6 +85,8 @@ const userSchema = new mongoose.Schema({
         unique:true,
     },
     password : String,
+    profilePhoto: String,
+    followedBy : Number,
 });
 
 const UserModel = mongoose.model('User',userSchema);
@@ -103,28 +96,36 @@ class User {
     lastName;
     email;
     password;
+    profilePhoto;
+    followedBy;
 
     constructor(user) {
         this.firstName = user.firstName;
         this.lastName = user.lastName;
         this.email = user.email;
         this.password = user.password;
+        this.profilePhoto = user.profilePhoto;
+        this.followedBy = user.followedBy;
     }
 }
 
 
 class Post {
-    constructor(createdBy,text){
+    constructor(createdBy,text,media,createdDate){
         this.createdBy = createdBy,
-        this.text = text
+        this.text = text,
+        this.media = media,
+        this.createdDate = createdDate;
     }
     
 }
 
 
 const postSchema = new mongoose.Schema({
-    createdBy:String,
-    text:String,
+    createdBy: String,
+    text: String,
+    media: String,
+    createdDate:Number,
 });
 const PostModel = mongoose.model('Post',postSchema);
 
@@ -134,7 +135,7 @@ const PostModel = mongoose.model('Post',postSchema);
 
 app.post('/addPost',(req,res) => {
      console.log(req.body)
-     const newPost = new Post(req.body.newPost.createdBy,req.body.newPost.text);
+     const newPost = new Post(req.body.newPost.createdBy,req.body.newPost.text,req.body.newPost.media, new Date().getTime());
      console.log(newPost)
      PostModel.create(newPost).then((data)=>{
        res.status(201).send("successfully shared");
