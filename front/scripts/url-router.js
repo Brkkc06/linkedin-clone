@@ -96,12 +96,22 @@ function getPosts() {
                     const followedByUser = json.user.followedBy + '\xa0' + "Takipçi";
                     const postMedia = post.media;
                     const postText = post.text;
+                    const likedByPostPhoto = post.likedByPostPhoto;
+                    const likedByPostUserName = post.likedByPostUserName + '\xa0' + "bunu beğendi";
                     Array.from(postDiv.getElementsByClassName("zgl"))[0].innerHTML = userName;
+                    if(likedByPostUserName && likedByPostPhoto){
+                        Array.from(postDiv.getElementsByClassName("evttuctvm"))[0].innerHTML = likedByPostUserName;
+                        Array.from(postDiv.getElementsByClassName("ivm-view-attr"))[0].src = likedByPostPhoto;
+                        
+                    }
+                    else 
+                       for(const likethisDiv of postDiv.getElementsByClassName("likethis"))
+                        likethisDiv.style.display = "none"
+                    
                     Array.from(postDiv.getElementsByClassName("golf"))[0].innerHTML = postText;
                     if (postMedia) {
                         Array.from(postDiv.getElementsByClassName("post-image"))[0].src = postMedia;
                     }
-
                     Array.from(postDiv.getElementsByClassName("img-anka "))[0].src = userProfilePhoto;
                     Array.from(postDiv.getElementsByClassName("tfn "))[0].innerHTML = followedByUser;
                     Array.from(postDiv.getElementsByClassName("mre "))[0].innerHTML = moment(new Date(post.createdDate)).fromNow(); ;

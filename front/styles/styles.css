@@ -831,7 +831,7 @@ html {
 
 .ivm-view-attr {
     height: 24px;
-    width: 24px;
+    
     border-radius: 50%;
 }
 
@@ -904,6 +904,8 @@ html {
 .img-anka {
     width: 48px;
     height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .mlk {
@@ -997,8 +999,9 @@ html {
 }
 
 .post-image {
-    height: 100%;
-    width: 100%;
+    max-width: 555px;
+    min-width: 555px;
+    object-fit: cover;
 }
 
 .btn-image {

@@ -111,11 +111,13 @@ class User {
 
 
 class Post {
-    constructor(createdBy,text,media,createdDate){
+    constructor(createdBy,text,media,createdDate,likedByPostPhoto,likedByPostUserName){
         this.createdBy = createdBy,
         this.text = text,
         this.media = media,
         this.createdDate = createdDate;
+        this.likedByPostPhoto = likedByPostPhoto;
+        this.likedByPostUserName = likedByPostUserName;
     }
     
 }
@@ -126,6 +128,8 @@ const postSchema = new mongoose.Schema({
     text: String,
     media: String,
     createdDate:Number,
+    likedByPostPhoto:String,
+    likedByPostUserName:String,
 });
 const PostModel = mongoose.model('Post',postSchema);
 

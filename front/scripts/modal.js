@@ -1,10 +1,12 @@
 
 class Post{
-    constructor(createdBy,text,media,createdDate){
+    constructor(createdBy,text,media,createdDate,likedByPostPhoto,likedByPostUserName){
         this.createdBy = createdBy
         this.text  = text;
         this.media =media;
         this.createdDate = createdDate;
+        this.likedByPostPhoto = likedByPostPhoto;
+        this.likedByPostUserName =likedByPostUserName;
     }
 }
 
