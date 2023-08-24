@@ -38,8 +38,7 @@ const urlRoutes = {
 const urlRoute = (event) => {
     // event = event || window.event;
     event.preventDefault();
-    console.log(event)
-    console.log(event.target)
+  
     window.history.pushState({}, "", event.target.href);
     urlLocationHandler();
 
@@ -50,11 +49,11 @@ const urlLocationHandler = async () => {
     if (location === "/") {
         location = "/feed";
     }
-    console.log(location)
+    
     const route = urlRoutes[location] || urlRoutes[404];
     const html = await fetch(route.template).then((response) => response.text());
     document.getElementById("content").innerHTML = html;
-    console.log(route.template)
+    
     if (route.template === "/public/feed.html") {
         getPosts()
     }
@@ -95,24 +94,32 @@ function getPosts() {
                     const userProfilePhoto = json.user.profilePhoto;
                     const followedByUser = json.user.followedBy + '\xa0' + "Takipçi";
                     const postMedia = post.media;
-                    const postText = post.text;
-                    const likedByPostPhoto = post.likedByPostPhoto;
-                    const likedByPostUserName = post.likedByPostUserName + '\xa0' + "bunu beğendi";
-                    Array.from(postDiv.getElementsByClassName("zgl"))[0].innerHTML = userName;
-                    if(likedByPostUserName && likedByPostPhoto){
-                        Array.from(postDiv.getElementsByClassName("evttuctvm"))[0].innerHTML = likedByPostUserName;
-                        Array.from(postDiv.getElementsByClassName("ivm-view-attr"))[0].src = likedByPostPhoto;
-                        
+                    const postText = post.text;   
+                    Array.from(postDiv.getElementsByClassName("zgl"))[0].innerHTML = userName;     
+                    Array.from(postDiv.getElementsByClassName("golf"))[0].innerHTML = postText;
+
+                    if(post.likedBy){
+                        const likedByResult = await fetch(`http://127.0.0.1:3000/getUserById/${post.likedBy}`,{
+                            method:"GET",
+                            headers:{
+                                "Content-type":"application/json"
+                            },
+                        });
+                        const jsonLikedBy = await likedByResult.json();
+                        const userPhoto = jsonLikedBy.user.profilePhoto
+                        const likedByPost = jsonLikedBy.user.firstName.charAt(0).toUpperCase() + jsonLikedBy.user.firstName.slice(1) + '\xa0' + jsonLikedBy.user.lastName.charAt(0).toUpperCase() + jsonLikedBy.user.lastName.slice(1);                       
+                        Array.from(postDiv.getElementsByClassName("evttuctvm"))[0].innerHTML = likedByPost;
+                        Array.from(postDiv.getElementsByClassName("ivm-view-attr"))[0].src = userPhoto;  
                     }
                     else 
                        for(const likethisDiv of postDiv.getElementsByClassName("likethis"))
-                        likethisDiv.style.display = "none"
-                    
-                    Array.from(postDiv.getElementsByClassName("golf"))[0].innerHTML = postText;
+                        likethisDiv.style.display = "none";
                     if (postMedia) {
                         Array.from(postDiv.getElementsByClassName("post-image"))[0].src = postMedia;
                     }
-                    Array.from(postDiv.getElementsByClassName("img-anka "))[0].src = userProfilePhoto;
+                    if(userProfilePhoto){
+                        Array.from(postDiv.getElementsByClassName("img-anka "))[0].src = userProfilePhoto;
+                    }
                     Array.from(postDiv.getElementsByClassName("tfn "))[0].innerHTML = followedByUser;
                     Array.from(postDiv.getElementsByClassName("mre "))[0].innerHTML = moment(new Date(post.createdDate)).fromNow(); ;
                     postsDiv.appendChild(postDiv);

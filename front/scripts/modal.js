@@ -1,12 +1,11 @@
 
 class Post{
-    constructor(createdBy,text,media,createdDate,likedByPostPhoto,likedByPostUserName){
+    constructor(createdBy,text,media,createdDate,likedBy){
         this.createdBy = createdBy
         this.text  = text;
         this.media =media;
         this.createdDate = createdDate;
-        this.likedByPostPhoto = likedByPostPhoto;
-        this.likedByPostUserName =likedByPostUserName;
+        this.likedBy =likedBy
     }
 }
 
@@ -67,3 +66,4 @@ function sharePost(e){
         
     })
 }
+

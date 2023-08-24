@@ -111,13 +111,12 @@ class User {
 
 
 class Post {
-    constructor(createdBy,text,media,createdDate,likedByPostPhoto,likedByPostUserName){
+    constructor(createdBy,text,media,createdDate,likedBy){
         this.createdBy = createdBy,
         this.text = text,
         this.media = media,
         this.createdDate = createdDate;
-        this.likedByPostPhoto = likedByPostPhoto;
-        this.likedByPostUserName = likedByPostUserName;
+        this.likedBy = likedBy;
     }
     
 }
@@ -128,8 +127,7 @@ const postSchema = new mongoose.Schema({
     text: String,
     media: String,
     createdDate:Number,
-    likedByPostPhoto:String,
-    likedByPostUserName:String,
+    likedBy : String,
 });
 const PostModel = mongoose.model('Post',postSchema);
 
@@ -139,7 +137,7 @@ const PostModel = mongoose.model('Post',postSchema);
 
 app.post('/addPost',(req,res) => {
      console.log(req.body)
-     const newPost = new Post(req.body.newPost.createdBy,req.body.newPost.text,req.body.newPost.media, new Date().getTime());
+     const newPost = new Post(req.body.newPost.createdBy,req.body.newPost.text,req.body.newPost.media, new Date().getTime(),req.body.newPost.likedBy);
      console.log(newPost)
      PostModel.create(newPost).then((data)=>{
        res.status(201).send("successfully shared");
