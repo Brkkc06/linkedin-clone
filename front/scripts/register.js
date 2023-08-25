@@ -43,7 +43,7 @@ function register(e) {
             alert("girdiğiniz  şifreler yanlış");
         }
     } catch(err) {
-        console.log(err)
+        // console.log(err)
     }
 
 }

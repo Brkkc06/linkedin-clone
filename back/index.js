@@ -19,9 +19,9 @@ app.use(cors({
 }));
 
 app.post('/addUser',(req,res) => {
-    console.log(req.body)
+    // console.log(req.body)
     const newUser = new User(req.body.newUser);
-    console.log(newUser)
+    // console.log(newUser)
     UserModel.create(newUser).then((data)=>{
         res.status(201).send("successfully saved");
     }).catch(err => {
@@ -33,9 +33,22 @@ app.post('/addUser',(req,res) => {
     })
 })
 
+app.post("/addFollower",(req,res) =>{
+    console.log(req.body)
+    // UserModel.find(req.body.followed).exec().then(res =>{
+        // bulunan kişinin takipçilerine follower'ı ekle
+        // UserModel.updateOne(newFollowed);
+    // })
+    // UserModel.find(req.body.follower).exec().then(res=>{
+        // bulunan kişinin takipettiklerine followed'ı ekle
+    //     
+    // })
+})
+
+
 app.post("/login",(req,response)=> {
     UserModel.find({ email: req.body.email }).exec().then(result => {
-        console.log('result:', result)
+        // console.log('result:', result)
 
         if(result.length !=0){
             if( req.body.password != result[0].password ){
@@ -55,13 +68,13 @@ app.post("/login",(req,response)=> {
 
 // app.get("/get-user-1/:id",(req,res) =>{
 //     const id = req.params.id;
-//     console.log(id);
+//     // console.log(id);
     
 // })
 app.post("/get-user-2",(req,res)=>{
-    console.log(req.body._id)
+    // console.log(req.body._id)
         UserModel.find({ _id: req.body._id, }).exec().then(result => {
-            console.log(result)
+            // console.log(result)
         })
 })
 
@@ -71,7 +84,6 @@ app.get("/getAll", async (req,res) => {
       
     })
 app.get("/getUserById/:id" , async (req,res) => {
-    
     const result = await UserModel.findOne({ _id : req.params.id}).exec();
     res.send({ user: result })
     
@@ -80,6 +92,8 @@ app.get("/getUserById/:id" , async (req,res) => {
 const userSchema = new mongoose.Schema({
     firstName : String,
     lastName : String,
+    followed:Array,
+    followers:Array,
     email :{
         type:String,
         unique:true,
@@ -98,6 +112,8 @@ class User {
     password;
     profilePhoto;
     followedBy;
+    followers;
+    followed;
 
     constructor(user) {
         this.firstName = user.firstName;
@@ -106,6 +122,8 @@ class User {
         this.password = user.password;
         this.profilePhoto = user.profilePhoto;
         this.followedBy = user.followedBy;
+        this.followers = user.followers;
+        this.followed = user.followed;
     }
 }
 
@@ -136,9 +154,9 @@ const PostModel = mongoose.model('Post',postSchema);
 
 
 app.post('/addPost',(req,res) => {
-     console.log(req.body)
+     // console.log(req.body)
      const newPost = new Post(req.body.newPost.createdBy,req.body.newPost.text,req.body.newPost.media, new Date().getTime(),req.body.newPost.likedBy);
-     console.log(newPost)
+     // console.log(newPost)
      PostModel.create(newPost).then((data)=>{
        res.status(201).send("successfully shared");
     })
@@ -151,5 +169,5 @@ app.post('/addPost',(req,res) => {
 
 
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+    // console.log(`Example app listening on port ${port}`)
 })

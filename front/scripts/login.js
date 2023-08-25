@@ -18,7 +18,7 @@
 
 // newUser1 = new User('asd', 'asd', 'asd', 'asd')
 
-// console.log(newUser1)
+// // console.log(newUser1)
 
 // class User{
 //     email;
@@ -33,7 +33,7 @@
 // var user1 = new User();
 // user1.email="brkkc06";
 // user1.password= 1234;
-// console.log(user1);
+// // console.log(user1);
 
 // function oneriAlerti(form){
 //     var inputValue=form.inputbox.value;
@@ -134,7 +134,7 @@ function getPosts() {
 
             // alert(json.text)
         }).catch(err => {
-            console.log(err);
+            // // console.log(err);
         })
     })
 }

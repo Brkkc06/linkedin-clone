@@ -1132,3 +1132,9 @@ html {
 .nav-btn img {
     pointer-events: none;
 }
+.btn-brk span{
+    pointer-events: none;
+}
+.btn-brk svg {
+    pointer-events:none;
+}

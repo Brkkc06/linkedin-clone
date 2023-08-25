@@ -36,6 +36,68 @@ function closeModal() {
 }
 
 
+const userId=sessionStorage.getItem("userId");
+
+function getByUserId(){
+    const res =  fetch(`http://127.0.0.1:3000/getUserById/${userId}`,{
+        method:"GET",
+        headers:{
+            "content-type":"application/json"
+        },
+
+    }).then(res =>{
+        res.json().then (async json => {
+            const result = json.user;
+            const userName = result.firstName;
+            const userLastName = result.lastName;
+            const userPersonelId = result._id;
+            const userFollowers = result.followers;
+            const userFollowed = result.followed;
+            // // console.log(userName)
+            if(userFollowers){
+                fetch (`http://127.0.0.1:3000/getUserById/${userFollowers}`,{
+                    method:"GET",
+                    headers:{
+                        "content-type":"application/json"
+                    },
+
+                }).then(response =>{
+                    response.json().then(async json =>{
+                        const resultUserFollowers = json.user;
+                        const userFollowersName= resultUserFollowers.firstName;
+                        const userFollowersLastName = resultUserFollowers.lastName;
+                        const userFollowersId = resultUserFollowers._id;  
+                    })
+                })
+            }
+            if(userFollowed){
+                fetch (`http://127.0.0.1:3000/getUserById/${userFollowed}`,{
+                    method:"GET",
+                    headers:{
+                        "content-type":"application/json"
+                    },
+
+                }).then(responseUserFollowed =>{
+                    responseUserFollowed.json().then(async json =>{
+                        const resultUserFollowed = json.user;
+                        const userFollowedName= resultUserFollowed.firstName;
+                        const userFollowedLastName = resultUserFollowed.lastName;
+                        const userFollowedId = resultUserFollowed._id; 
+                        // // console.log(userFollowedLastName) 
+                    })
+                })
+            }
+
+            
+        })
+    })
+}
+
+// getByUserId();
+
+
+
+
 
 function sharePost(e){
     e.preventDefault()
@@ -45,6 +107,9 @@ function sharePost(e){
     
 
     newPost = new Post(sessionStorage.getItem("userId"), inputText);
+    
+    
+   
     
     fetch("http://127.0.0.1:3000/addPost",{
         method:"POST",
