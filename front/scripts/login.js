@@ -72,6 +72,7 @@ function login(e) {
     })
 }
 function getPosts() {
+    const loginUserId= sessionStorage.getItem("userId");
     fetch("http://127.0.0.1:3000/getAll", {
         method: "GET",
         headers: {
@@ -101,8 +102,20 @@ function getPosts() {
                     const followedByUser = json.user.followedBy + '\xa0' + "Takipçi";
                     const postMedia = post.media;
                     const postText = post.text;   
+                    const postFollowedByUser = json.user.followed;
+                    const postFollowersOfUser = json.user.followers;  
+                    if(postFollowersOfUser.includes(loginUserId)){
+                        for(const btnBrk of postDiv.getElementsByClassName("btn-brk"))
+                        btnBrk.style.display = "none";
+                    }
+                    if(loginUserId === post.createdBy){
+                        for(const btnBrk of postDiv.getElementsByClassName("btn-brk"))
+                        btnBrk.style.display = "none";
+                    }
+                   
                     Array.from(postDiv.getElementsByClassName("zgl"))[0].innerHTML = userName;     
                     Array.from(postDiv.getElementsByClassName("golf"))[0].innerHTML = postText;
+                    
 
                     if(post.likedBy){
                         const likedByResult = await fetch(`http://127.0.0.1:3000/getUserById/${post.likedBy}`,{
@@ -118,14 +131,19 @@ function getPosts() {
                         Array.from(postDiv.getElementsByClassName("ivm-view-attr"))[0].src = userPhoto;  
                     }
                     else 
-                       for(const likethisDiv of postDiv.getElementsByClassName("likethis"))
+                       
+                        for(const likethisDiv of postDiv.getElementsByClassName("likethis"))
                         likethisDiv.style.display = "none";
                     if (postMedia) {
                         Array.from(postDiv.getElementsByClassName("post-image"))[0].src = postMedia;
                     }
                     if(userProfilePhoto){
                         Array.from(postDiv.getElementsByClassName("img-anka "))[0].src = userProfilePhoto;
+                       
                     }
+                   
+                    const accessKey = post.createdBy
+                    Array.from(postDiv.getElementsByClassName("btn-brk"))[0].accessKey = accessKey;
                     Array.from(postDiv.getElementsByClassName("tfn "))[0].innerHTML = followedByUser;
                     Array.from(postDiv.getElementsByClassName("mre "))[0].innerHTML = moment(new Date(post.createdDate)).fromNow(); ;
                     postsDiv.appendChild(postDiv);
@@ -136,5 +154,23 @@ function getPosts() {
         }).catch(err => {
             // // console.log(err);
         })
+    })
+    
+}
+function getButtonBrk(e) {
+    const accessKey = event.target.accessKey;
+    const loginUserId = sessionStorage.getItem("userId");
+
+    fetch("http://127.0.0.1:3000/addFollower",{
+        method:"POST",
+        headers:{
+            "content-type":"application/json"
+        },
+        body:JSON.stringify({
+           follower: loginUserId,
+           followed: accessKey,
+         })
+    }).then((res) => res.text()).then(async (res) =>{
+        alert(res);
     })
 }

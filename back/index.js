@@ -34,12 +34,23 @@ app.post('/addUser',(req,res) => {
 })
 
 app.post("/addFollower",(req,res) =>{
-    console.log(req.body)
-    // UserModel.find(req.body.followed).exec().then(res =>{
+  const follower = req.body.follower;
+  const followed = req.body.followed;
+ UserModel.updateOne(
+    {_id:follower},
+    {$addToSet:
+    {"followed":followed}}).then();
+
+ UserModel.updateOne(
+    {_id:followed},
+    {$addToSet:
+    {"followers":follower}})
+    
+    .then();
+   
         // bulunan kişinin takipçilerine follower'ı ekle
         // UserModel.updateOne(newFollowed);
     // })
-    // UserModel.find(req.body.follower).exec().then(res=>{
         // bulunan kişinin takipettiklerine followed'ı ekle
     //     
     // })

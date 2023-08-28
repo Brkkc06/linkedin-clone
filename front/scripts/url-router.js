@@ -97,19 +97,17 @@ const loginUserId= sessionStorage.getItem("userId");
                     const postMedia = post.media;
                     const postText = post.text;   
                     const postFollowedByUser = json.user.followed;
-                    const postFollowersOfUser = json.user.followers;
-                    if(postFollowedByUser.includes(loginUserId)){
+                    const postFollowersOfUser = json.user.followers;                   
+                    Array.from(postDiv.getElementsByClassName("zgl"))[0].innerHTML = userName;     
+                    Array.from(postDiv.getElementsByClassName("golf"))[0].innerHTML = postText;
+                    if(postFollowersOfUser.includes(loginUserId)){
                         for(const btnBrk of postDiv.getElementsByClassName("btn-brk"))
                         btnBrk.style.display = "none";
                     }
-                    else{
-                        // // console.log("takip et.")
+                    if(loginUserId === post.createdBy){
+                        for(const btnBrk of postDiv.getElementsByClassName("btn-brk"))
+                        btnBrk.style.display = "none";
                     }
-                  
-                    
-                    Array.from(postDiv.getElementsByClassName("zgl"))[0].innerHTML = userName;     
-                    Array.from(postDiv.getElementsByClassName("golf"))[0].innerHTML = postText;
-
                     if(post.likedBy){
                         const likedByResult = await fetch(`http://127.0.0.1:3000/getUserById/${post.likedBy}`,{
                             method:"GET",
@@ -123,7 +121,7 @@ const loginUserId= sessionStorage.getItem("userId");
                         Array.from(postDiv.getElementsByClassName("evttuctvm"))[0].innerHTML = likedByPost;
                         Array.from(postDiv.getElementsByClassName("ivm-view-attr"))[0].src = userPhoto;  
                     }
-                    else 
+                    else                         
                        for(const likethisDiv of postDiv.getElementsByClassName("likethis"))
                         likethisDiv.style.display = "none";
                     if (postMedia) {
@@ -131,7 +129,7 @@ const loginUserId= sessionStorage.getItem("userId");
                     }
                     if(userProfilePhoto){
                         Array.from(postDiv.getElementsByClassName("img-anka "))[0].src = userProfilePhoto;
-                    }
+                    }                                   
                     const accessKey = post.createdBy
                     Array.from(postDiv.getElementsByClassName("tfn "))[0].innerHTML = followedByUser;
                     Array.from(postDiv.getElementsByClassName("btn-brk"))[0].accessKey = accessKey;                
@@ -149,8 +147,6 @@ const loginUserId= sessionStorage.getItem("userId");
 
 function getButtonBrk(e) {
     const accessKey = event.target.accessKey;
-    console.log(accessKey)
-    console.log(e)
     const loginUserId = sessionStorage.getItem("userId");
 
     fetch("http://127.0.0.1:3000/addFollower",{
@@ -162,6 +158,8 @@ function getButtonBrk(e) {
            follower: loginUserId,
            followed: accessKey,
          })
+    }).then((res) => res.text()).then(async (res) =>{
+        alert(res);
     })
 }
 
