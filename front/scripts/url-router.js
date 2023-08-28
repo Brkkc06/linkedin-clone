@@ -32,6 +32,12 @@ const urlRoutes = {
         title: "404 |" + urlPageTitle,
         description: "You are redirected to the login page"
     },
+    "/editProfile":{
+        template:"/public/editProfile.html",
+        title:"404 |" + urlPageTitle,
+        description:"This is edit profile page"
+    },
+
 
 }
 

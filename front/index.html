@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="styles/register.css" type="text/css" media="screen">
     <link rel="stylesheet" href="styles/styles.css" type="text/css" media="screen">
     <link rel="stylesheet" href="styles/modal.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="styles/editProfile.css" type="text/css" media="screen">
 
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -24,6 +25,7 @@
     <script src="scripts/modal.js"></script>
     <script src="scripts/url-router.js"></script>
     <script src="scripts/moment.js"></script>
+    <script src="scripts/editProfile.js"></script>
     <title></title>
     <meta name="description" content="">
 </head>
@@ -48,9 +50,9 @@
                         <i class="fa-solid fa-house-chimney"></i>
                         Ana Sayfa
                     </a>
-                    <a href="https://www.linkedin.com/mynetwork/" class="btn nav-btn">
+                    <a href="/editProfile" onclick="urlRoute(event)" class="btn nav-btn">
                         <i class="fa-solid fa-user-group"></i>
-                        Ağım
+                        Profilini Düzenle
                     </a>
                     <a href="https://www.linkedin.com/jobs/" class="btn nav-btn">
                         <i class="fa-solid fa-briefcase"></i>
