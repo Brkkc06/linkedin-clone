@@ -172,10 +172,11 @@ function getProfilePhoto() {
             else {
                 Array.from(document.getElementsByClassName("post-photo-style"))[0].src = "assets/nonprofilephoto.png"
             }
-            if (loginUserId) {
+            
+            if (loginUserId != null) {
                 Array.from(document.getElementsByClassName("logInLogOut"))[0].innerHTML = "Çıkış"
             }
-            else {
+            else if(loginUserId === null) {
                 Array.from(document.getElementsByClassName("logInLogOut"))[0].innerHTML = "Oturum Aç"
             }
         })
