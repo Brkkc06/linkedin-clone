@@ -111,6 +111,7 @@ const userSchema = new mongoose.Schema({
     },
     password : String,
     profilePhoto: String,
+    backgroundPhoto:String,
     
 });
 
@@ -124,6 +125,7 @@ class User {
     profilePhoto;
     followers;
     followed;
+    backgroundPhoto;
 
     constructor(user) {
         this.firstName = user.firstName;
@@ -133,6 +135,7 @@ class User {
         this.profilePhoto = user.profilePhoto;    
         this.followers = user.followers;
         this.followed = user.followed;
+        this.backgroundPhoto = user.backgroundPhoto;
     }
 }
 

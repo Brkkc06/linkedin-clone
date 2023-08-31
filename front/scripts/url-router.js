@@ -65,6 +65,9 @@ const urlLocationHandler = async () => {
         getProfilePhoto()
         getUserName()
     }
+    if(route.template === "/public/editProfile.html"){
+        getProfileInfo();
+    }
 
     document.title = route.title;
     document.querySelector('meta[name="description"]').setAttribute("content", route.description);

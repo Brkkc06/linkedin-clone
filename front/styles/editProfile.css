@@ -18,11 +18,13 @@
     width: 100%;
     justify-content: center;
 }
-#editPhoto{
+.editPhoto{
+    min-width: 150px;
     max-width: 150px;
     min-height: 150px;
+    max-height: 150px;
     border-radius: 50%;
-    object-fit: cover;
+    object-fit: fill;
 }
 .editProfilePhoto{
     display: flex;
@@ -97,9 +99,10 @@
 .editBackground{
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    width: 35rem;
-    height: 12rem;
-    object-fit: cover;
+    max-width: 35rem;
+    max-height: 12rem;
+    width: auto;
+    height: auto;
 }
 .backGroundChangeButton{
     margin-top: 32px;
@@ -151,4 +154,85 @@ input[type="file"]{
 .error{
     text-align: left;
     color:var(--googlered);
+}
+
+
+.bodyChips{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+    background-color: var(--hoverkremi);
+}
+.wrapperChips{
+    width: 49.6rem;
+    background-color: var(--bodybgc);
+    border-radius: 10px;
+    padding: 18px 25px 20px;
+}
+.wrapperChips :where(.titleChips,li,li i, .detailsChips) {
+    display: flex;
+    align-items: center;
+}
+.wrapperChips .titleChips h2{
+    font-size: 2.1rem;
+    font-weight: 600;
+}
+.wrapperChips .titleChips .fa-tags{
+    font-size: 2.1rem;
+}
+.wrapperChips .contentChips{
+    margin: 10px 0;
+}
+.contentChips p{
+    font-size: 1.5rem;
+}
+.contentChips ul{
+    display: flex;
+    padding: 7px;
+    margin:12px 0;
+    border-radius: 5px;
+    border: 1px solid #a6a6a6;
+}
+.contentChips ul li{
+    list-style: none;
+    margin: 4px 3px;
+    border-radius: 5px;
+    padding: 5px 8px 5px 10px;
+    background-color: #f2f2f2;
+    border:1px solid #e3d1e1;
+    display: flex;
+    font-size: 1.5rem;
+}
+.contentChips ul li i{
+    height: 20px;
+    cursor: pointer;
+    width: 20px;
+    font-size: 1.2rem;
+    background: #dfdfdf;
+    border-radius: 50%;
+    margin-left: 8px;
+    color:#808080;
+    justify-content: center;
+}
+.contentChips ul input{
+    outline: none;
+    flex: 1;
+    padding: 5px;
+    font-size: 1.6rem;
+    border: none;
+}
+.wrapperChips .detailsChips{
+    justify-content: end;
+
+}
+.detailsChips button{
+    border: none;
+    outline: none;
+    background: var(--linkedinlacivert); 
+    color: var(--bodybgc);
+    padding: 9px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.4rem;
 }

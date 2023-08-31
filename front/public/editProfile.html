@@ -1,7 +1,7 @@
 <div class="row editPage">
     <div class="col">
         <div class="editProfilePhoto">
-            <img id="editPhoto" src="assets/nonprofilephoto.png">
+            <img class="editPhoto">
             <form class="profilePhotoForm" onsubmit="HandleSubmit(event)">
                 <input type="file" id="profilePhotoUpload" multiple accept="image/*">
                 <label for="profilePhotoUpload" class="profilePhotoLabel">
@@ -40,14 +40,32 @@
                 <button disabled type="submit" class="ConfirmButton">Güncelle</button>
             </div>
         </form>
-        <!-- <form id="SkillsForm">
-            Daha sonra eklenecek
-        </form> -->
+        <div class="bodyChips">
+            <div class="wrapperChips">
+                <div class="titleChips">
+                    <i class="fa-solid fa-tags "></i>
+                    <h2>Skills</h2>
+                </div>
+                <div class="contentChips ">
+                    <p>Yetenek ismi Girin</p>
+                    <div class="skillBox">
+                        <ul class="ulChips">
+                            <li>html <i class="fa-solid fa-xmark fa-2xs"></i></li>
+                            <li>css <i class="fa-solid fa-xmark fa-2xs"></i></li>
+                            <input id="inputChips" type="text">
+                        </ul>
+                    </div>
+                </div>
+                <div class="detailsChips">
+                    <button>Hepsini Kaldır</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="col">
         <div class="editBackgroundPhoto">
-            <img class="editBackground" src="assets/cap-photo.svg">
+            <img class="editBackground">
             <form class="backgroundPhotoForm" onsubmit="BackgroundHandleSubmit(event)">
                 <input type="file" id="backgroundPhotoUpload" multiple accept="image/*">
                 <label for="backgroundPhotoUpload" class="backgroundPhotoLabel">
