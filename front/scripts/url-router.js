@@ -67,6 +67,7 @@ const urlLocationHandler = async () => {
     }
     if(route.template === "/public/editProfile.html"){
         getProfileInfo();
+        startEditProfile();
     }
 
     document.title = route.title;

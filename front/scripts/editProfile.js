@@ -1,5 +1,4 @@
 // const file = document.getElementById("profilePhotoUpload");
-urlLocationHandler;
 const img = document.getElementsByClassName("editPhoto");
 function logFile(event){
     console.log(document.getElementById("profilePhotoUpload").files)
@@ -72,18 +71,55 @@ function getProfileInfo(){
     })
 }
 
-const ul = document.getElementsByClassName("ulChips");
-const input = document.getElementById("inputChips");
+function addSkill(e){
+    console.log(e)
+    console.log(e.target.value);
+   
+}
+
+function startEditProfile() {
+    const ul = document.getElementsByClassName("ulChips");
+    const  removeButton = document.getElementById("removeButton");
+    const input = document.getElementById("inputChips"); 
+    input.addEventListener("keyup",addSkill)
+}
+let skills =[];
+
+function createSkill(){
+    const ul = document.getElementsByClassName("ulChips");
+    ul[0].querySelectorAll("li").forEach(li => li.remove());
+    
+
+    skills.slice().reverse().forEach(skill =>{
+        let liSkill = `<li>${skill} <i class="fa-solid fa-xmark fa-2xs"  onclick="remove(this,'${skill}')"></i></li>`;
+        ul[0].insertAdjacentHTML("afterbegin",liSkill);
+    })
+}
+
+function remove(element, skill){
+    let index = skills.indexOf(skill);
+    skills =[...skill.slice(0,index),...skills.slice(index+1)];
+    element.parentElement.remove();
+}
 
 function addSkill(e){
-    console.log(e.target.value);
+    if(e.key =="Enter"){
+        const skill = e.target.value.replace(/\s+/g,' ')
+        if(skill.length > 1 && !skills.includes(skill)){
+            skill.split(' , ').forEach(skill =>{
+                skills.push(skill)
+                createSkill();
+            });
+        }
+        e.target.value = "";
+    }
 }
 
-
-if(input){
-    input.addEventListener("keyup",addSkill,false)
+function removeButtonActivity(event){
+    const ul = document.getElementsByClassName("ulChips");
+    skills.length = 0;
+    ul[0].querySelectorAll("li").forEach(li => li.remove());
 }
-
 
 
 

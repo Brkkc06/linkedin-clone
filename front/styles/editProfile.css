@@ -162,7 +162,8 @@ input[type="file"]{
     align-items: center;
     justify-content: center;
     min-height: 50vh;
-    background-color: var(--hoverkremi);
+    background-color: var(--bodybgc);
+
 }
 .wrapperChips{
     width: 49.6rem;
@@ -189,31 +190,37 @@ input[type="file"]{
 }
 .contentChips ul{
     display: flex;
+    flex-wrap: wrap;
     padding: 7px;
     margin:12px 0;
     border-radius: 5px;
     border: 1px solid #a6a6a6;
+   
 }
 .contentChips ul li{
     list-style: none;
     margin: 4px 3px;
     border-radius: 5px;
     padding: 5px 8px 5px 10px;
-    background-color: #f2f2f2;
+    background-color:#555;
     border:1px solid #e3d1e1;
     display: flex;
     font-size: 1.5rem;
+    color: white;
 }
 .contentChips ul li i{
-    height: 20px;
+    height: 15px;
     cursor: pointer;
-    width: 20px;
-    font-size: 1.2rem;
-    background: #dfdfdf;
+    width: 15px;
+    font-size: 0.8rem;
+    background: #333;
     border-radius: 50%;
     margin-left: 8px;
-    color:#808080;
+    color:#fff;
     justify-content: center;
+}
+.contentChips ul li i:hover{
+    color: red;
 }
 .contentChips ul input{
     outline: none;
@@ -221,6 +228,7 @@ input[type="file"]{
     padding: 5px;
     font-size: 1.6rem;
     border: none;
+    background-color: var(--bodybgc);
 }
 .wrapperChips .detailsChips{
     justify-content: end;
