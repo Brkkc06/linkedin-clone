@@ -49,7 +49,8 @@ function getProfileInfo(){
             const getLastName = json.user.lastName;
             const getMail = json.user.email;
             const getPass = json.user.password; 
-            const getBackgroundPhoto = json.user.backgroundPhoto         
+            const getBackgroundPhoto = json.user.backgroundPhoto;
+            const getSkills = json.user.skills;         
             if(getProfilePhoto){
                 Array.from(document.getElementsByClassName("editPhoto"))[0].src= getProfilePhoto
             }
@@ -66,6 +67,9 @@ function getProfileInfo(){
             Array.from(document.getElementsByClassName("editLastName"))[0].value = getLastName;
             Array.from(document.getElementsByClassName("editEmail"))[0].value = getMail;
             Array.from(document.getElementsByClassName("editPass"))[0].value = getPass;
+            if(getSkills){
+                Array.from(document.getElementById("inputChips")).value = getSkills;
+            }
 
         })
     })
@@ -122,5 +126,25 @@ function removeButtonActivity(event){
 }
 
 
+function onChangeInput() {
+    document.getElementsByClassName('changeSaveBtn')[0].disabled = false;
+}
 
+function uptadeUser(){
+const updateFirstName = document.getElementsByClassName("editFirstName")[0];
+const updateLastName = document.getElementsByClassName("editLastName")[0];
+const updateEmail = document.getElementsByClassName("editEmail")[0];
+const updatePass = document.getElementsByClassName("editPass")[0];
+const updateSkill = document.getElementById("inputChips");
 
+    fetch(`http://127.0.0.1:3000/getUserById/${uptadeUser}`,{
+        method:"Post",
+        headers:{
+            "Content-type" : "application/json"
+        },
+        body:{
+
+        }
+
+    })
+}

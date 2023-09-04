@@ -12,6 +12,7 @@
     --asd:#FFF0F5;
     --bodybgc:#f3f2ef;
     --confirmGreen:#32CD32;
+    --bordercolor:#a6a6a6;
 }
 .editPage{
     padding-top: 3rem;
@@ -73,24 +74,6 @@
     background-color: var(--bgc);
     transition: ease 0.5s;  
 }
-.ConfirmButton{
-    font-size: 1.8rem;
-    background-color: var(--confirmGreen);
-    color:var(--bgc);
-    font-weight: 600;
-    border: none;
-    border-radius: 5rem;
-    transition: ease 0.3s;
-    cursor: pointer;
-}
-.ConfirmButton:hover{
-    box-shadow: 0px 1px 2px 0px var(--confirmGreen);
-}
-.ConfirmButton:disabled{
-    background-color: var(--googlegrey);
-    box-shadow: none;
-    cursor: not-allowed;
-}
 .editBackgroundPhoto{
     display: flex;
     justify-content: center; 
@@ -109,6 +92,7 @@
     padding: 0 !important;
     font-size: 1.5rem;
     width: 20rem;
+    max-height: 3rem;
     border-radius: 5px 5px 5px 5px;
     border-color: var(--googledarkgrey);
     border: 1px solid;
@@ -127,6 +111,7 @@
 #backgroundPhotoUpload{
     margin-top: 32rem;
     font-size: 1rem;
+   
 }
 input[type="file"]{
     display: none;
@@ -148,28 +133,29 @@ input[type="file"]{
     text-align: center;
     width: 16em;
     border-radius: 0.3em;
-    margin-right: 1em;
+    margin-top:32px;
+    margin-right: 2rem;
     cursor: pointer; 
+    max-height: 3rem;
 }
 .error{
     text-align: left;
     color:var(--googlered);
 }
-
-
 .bodyChips{
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 50vh;
     background-color: var(--bodybgc);
-
 }
 .wrapperChips{
     width: 49.6rem;
     background-color: var(--bodybgc);
     border-radius: 10px;
     padding: 18px 25px 20px;
+    border-top: 1px solid var(--bordercolor);
+   
 }
 .wrapperChips :where(.titleChips,li,li i, .detailsChips) {
     display: flex;
@@ -243,4 +229,22 @@ input[type="file"]{
     border-radius: 5px;
     cursor: pointer;
     font-size: 1.4rem;
+}
+.changeSave{
+    display: flex;
+    justify-content: end;
+
+}
+.changeSaveBtn{
+    margin: 0 40px 0 0;
+    font-size: 1.6rem;
+    font-weight: 600;
+   background-color: var(--confirmGreen);
+   color: var(--bgc);
+   border: none;
+   border-radius: 5px;
+}
+.changeSaveBtn:disabled{
+    background-color: var(--colorcrema);
+    color: var(--bordercolor);
 }

@@ -1,45 +1,38 @@
+<form  class="changeSaveForm"  onsubmit="uptadeUser()" >
 <div class="row editPage">
     <div class="col">
         <div class="editProfilePhoto">
             <img class="editPhoto">
-            <form class="profilePhotoForm" onsubmit="HandleSubmit(event)">
                 <input type="file" id="profilePhotoUpload" multiple accept="image/*">
                 <label for="profilePhotoUpload" class="profilePhotoLabel">
                     <i class="fa-solid fa-upload"></i> &nbsp;
                     Dosya Seçin veya Sürükleyin
                 </label>
-                <button type="submit" class="changePhoto">Kaydet</button>
+                <button type="button" class="changePhoto" onclick="onChangeInput(), HandleSubmit(event) ">Yükle</button>
                 <div class="error"></div>
-            </form>
         </div>
     </div>
     <div class="col" style="border-right: 1px solid var(--googlegrey); border-left: 1px solid var(--googlegrey);">
-        <form id="editProfileForm">
             <div class="row">
                 <div class="col editInfo">
                     <label for="editFirstName"><b>Adınız</b></label>
-                    <input type="text" name="editFirstName" class="editFirstName editInput" required>
+                    <input type="text" name="editFirstName" class="editFirstName editInput" onchange="onChangeInput()" required>
                 </div>
                 <div class="col editInfo">
                     <label for="editLastName"><b>Soyadınız</b></label>
-                    <input type="text" name="editLastName" class="editLastName editInput" required>
+                    <input type="text" name="editLastName" class="editLastName editInput" onchange="onChangeInput()" required>
                 </div>
             </div>
             <div class="row">
                 <div class="col editPassAndMail">
                     <label for="editEmail"><b>E-posta adresiniz</b></label>
-                    <input type="text" name="editEmail" class="editEmail editInput" required>
+                    <input type="text" name="editEmail" class="editEmail editInput" onchange="onChangeInput()" required>
                 </div>
                 <div class="col editPassAndMail">
                     <label for="editPass"><b>Şifreniz</b></label>
-                    <input type="password" name="editPass" class="editPass editInput" required>
+                    <input type="password" name="editPass" class="editPass editInput" onchange="onChangeInput()" required>
                 </div>
             </div>
-            <div
-                style="display: flex; justify-content: center; border-bottom: 1px solid var(--googlegrey); padding-bottom: 2.5rem;">
-                <button disabled type="submit" class="ConfirmButton">Güncelle</button>
-            </div>
-        </form>
         <div class="bodyChips">
             <div class="wrapperChips">
                 <div class="titleChips">
@@ -50,12 +43,12 @@
                     <p>Yetenek ismi Girin</p>
                     <div class="skillBox">
                         <ul class="ulChips">
-                            <input id="inputChips" type="text" placeholder="Yazınız...">
+                            <input id="inputChips" type="text" placeholder="Yazınız..." onchange="onChangeInput()">
                         </ul>
                     </div>
                 </div>
                 <div class="detailsChips">
-                    <button id="removeButton" onclick="removeButtonActivity(event)" >Hepsini Kaldır</button>
+                    <button id="removeButton" >Hepsini Kaldır</button>
                 </div>
             </div>
         </div>
@@ -64,15 +57,17 @@
     <div class="col">
         <div class="editBackgroundPhoto">
             <img class="editBackground">
-            <form class="backgroundPhotoForm" onsubmit="BackgroundHandleSubmit(event)">
                 <input type="file" id="backgroundPhotoUpload" multiple accept="image/*">
                 <label for="backgroundPhotoUpload" class="backgroundPhotoLabel">
                     <i class="fa-solid fa-upload"></i> &nbsp;
                     Dosya Seçin veya Sürükleyin
                 </label>
-                <button type="submit" class="backGroundChangeButton">Yükle</button>
-            </form>
+                <button type="button" class="backGroundChangeButton" onclick="BackgroundHandleSubmit(event)">Yükle</button>       
         </div>
     </div>
 
 </div>
+<div class="changeSave">
+<button type="button" class="changeSaveBtn"  disabled>Değişiklikleri Kaydet</button>
+</div>
+</form>

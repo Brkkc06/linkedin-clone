@@ -56,6 +56,12 @@ app.post("/addFollower",(req,res) =>{
     // })
 })
 
+app.post("/updateUser",(req,res) =>{
+    
+    
+})
+
+
 
 app.post("/login",(req,response)=> {
     UserModel.find({ email: req.body.email }).exec().then(result => {
@@ -105,6 +111,7 @@ const userSchema = new mongoose.Schema({
     lastName : String,
     followed:Array,
     followers:Array,
+    skills:Array,
     email :{
         type:String,
         unique:true,
@@ -126,6 +133,7 @@ class User {
     followers;
     followed;
     backgroundPhoto;
+    skills;
 
     constructor(user) {
         this.firstName = user.firstName;
@@ -136,6 +144,7 @@ class User {
         this.followers = user.followers;
         this.followed = user.followed;
         this.backgroundPhoto = user.backgroundPhoto;
+        this.skills = user.skills;
     }
 }
 
