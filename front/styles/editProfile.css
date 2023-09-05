@@ -233,7 +233,9 @@ input[type="file"]{
 .changeSave{
     display: flex;
     justify-content: end;
-
+}
+.changeSaveBtn:hover{
+    box-shadow: 1px 0px 2px 3px var(--confirmGreen);
 }
 .changeSaveBtn{
     margin: 0 40px 0 0;
@@ -243,6 +245,7 @@ input[type="file"]{
    color: var(--bgc);
    border: none;
    border-radius: 5px;
+   transition: ease 0.3s;
 }
 .changeSaveBtn:disabled{
     background-color: var(--colorcrema);

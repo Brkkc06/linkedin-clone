@@ -57,8 +57,19 @@ app.post("/addFollower",(req,res) =>{
 })
 
 app.post("/updateUser",(req,res) =>{
-    
-    
+    const loginUserId = req.body.loginUserId;
+    const user = req.body.user;
+    UserModel.updateOne(
+        {_id :loginUserId },
+        user
+    )
+    .then((result) => {
+        // console.error(result)
+        // response.send("başarıyla kaydedildi.")
+        console.log("kaydedildi.")
+    }).catch((err)=>[
+        console.error(err)
+    ])
 })
 
 
