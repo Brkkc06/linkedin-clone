@@ -5,7 +5,9 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
 const express = require('express')
 const cors = require('cors');
-const app = express()
+const app = express();
+const  fs = require('fs');
+const fileupload = require('express-fileupload');
 const port = 3000
 let db;
 
@@ -14,9 +16,18 @@ mongoose.Promise = global.Promise;
 
 app.use(bodyParser.urlencoded({ extended:false}));
 app.use(bodyParser.json());
+app.use(express.static(__dirname + '/images'))
 app.use(cors({
     origin: '*'
-}));
+}
+),
+fileupload()
+);
+
+app.get("/getFile", (req, res) => {
+    res.sendFile(req.query.src)
+
+});
 
 app.post('/addUser',(req,res) => {
     // console.log(req.body)
@@ -31,6 +42,16 @@ app.post('/addUser',(req,res) => {
             res.status(500).send("error happened");
         }
     })
+})
+app.post("/saveImg", (req,res) => {
+    const fileName = `${Date.now()}.jpg`;
+    const filePath = `C:\\Users\\tuozm\\OneDrive\\Masaüstü\\linkedin c\\back\\images\\${fileName}`;
+    fs.writeFile(filePath, req.files.image.data, (err, result) => {
+        if(err) res.status(500);
+        else res.send(filePath);
+        
+    })
+   
 })
 
 app.post("/addFollower",(req,res) =>{

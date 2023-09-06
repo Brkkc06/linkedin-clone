@@ -1,15 +1,28 @@
 
 const img = document.getElementsByClassName("editPhoto");
+let imgSrc,imgSrcBckground;
+async function saveUserImg(imgtype){
+    const formData = new FormData();
+    formData.append("image", document.getElementById(imgtype).files[0]);
+    fetch("http://127.0.0.1:3000/saveImg", {method: "post", body: formData}).then(async (res) => {
+        if(imgtype === "profilePhotoUpload") imgSrc = await res.text()
+        
+        else imgSrcBckground =await res.text()
+    });
+}
 function logFile(event) {
-    console.log(document.getElementById("profilePhotoUpload").files)
+    // 
     var reader = new FileReader();
 
     reader.onload = function (event) {
-        console.log(event);
+        
         document.getElementsByClassName("editPhoto")[0].src = event.target.result;
     };
 
     reader.readAsDataURL(document.getElementById("profilePhotoUpload").files[0]);
+    saveUserImg("profilePhotoUpload");
+   
+
 }
 function HandleSubmit(event) {
 
@@ -28,12 +41,18 @@ function logFileBackground(event) {
         document.getElementsByClassName("editBackground")[0].src = event.target.result;
     }
     readerBackground.readAsDataURL(document.getElementById("backgroundPhotoUpload").files[0]);
+    saveUserImg("backgroundPhotoUpload");
+    
 }
 function BackgroundHandleSubmit(event) {
     event.preventDefault();
     logFileBackground(event);
 }
-
+async function getFile(imgsrc){
+    const url = encodeURIComponent(imgsrc) 
+    const result = await fetch(`http://127.0.0.1:3000/getFile?src=${url}`)
+    return result?.url;
+}
 let skills = [];
 function getProfileInfo() {
     const loginUserId = sessionStorage.getItem("userId");
@@ -52,13 +71,14 @@ function getProfileInfo() {
             const getBackgroundPhoto = json.user.backgroundPhoto;
             const getSkills = json.user.skills;
             if (getProfilePhoto) {
-                Array.from(document.getElementsByClassName("editPhoto"))[0].src = getProfilePhoto
+                Array.from(document.getElementsByClassName("editPhoto"))[0].src =  await getFile(getProfilePhoto);
             }
             else {
                 Array.from(document.getElementsByClassName("editPhoto"))[0].src = "assets/nonprofilephoto.png"
             }
             if (getBackgroundPhoto) {
-                Array.from(document.getElementsByClassName("editBackground"))[0].src = getBackgroundPhoto
+              
+                Array.from(document.getElementsByClassName("editBackground"))[0].src =   await getFile(getBackgroundPhoto);
             }
             else {
                 Array.from(document.getElementsByClassName("editBackground"))[0].src = "assets/cap-photo.svg"
@@ -152,13 +172,13 @@ function updateUser(e) {
         body:JSON.stringify({
             loginUserId:loginUserId,
             user:{
-                firstName : updateFirstName,
-                lastName : updateLastName,
-                email : updateEmail,
-                password : updatePass,
-                skills : updateSkill,
-                backgroundPhoto : updateBackground,
-               profilePhoto : updateProfilePhoto
+                firstName: updateFirstName,
+                lastName: updateLastName,
+                email: updateEmail,
+                password: updatePass,
+                skills: updateSkill,
+                backgroundPhoto: imgSrcBckground,
+                profilePhoto: imgSrc
             }
 
         }) 
