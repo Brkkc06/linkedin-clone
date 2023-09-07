@@ -534,6 +534,8 @@ html {
 .p-cap-photo {
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
+    width: 22.5rem;
+    height: 5.625rem;
 }
 .cc-list-text:hover {
     background-color: rgb(0 0 0 / 15%);
