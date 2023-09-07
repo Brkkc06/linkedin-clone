@@ -6,15 +6,12 @@ class User {
         this.lastName = lastName;
     }
 }
-
 function register(e) {
     try {
         e.preventDefault()
-        registerForm = document.getElementById('registerForm')
-    
+        registerForm = document.getElementById('registerForm')   
         inputPassword = registerForm.elements.password.value
         inputControlPassword = registerForm.elements.controlPassword.value
-    
         if (inputControlPassword === inputPassword) {
             inputEmail = registerForm.elements.email.value;
             inputfirstName = registerForm.elements.firstName.value
@@ -22,7 +19,6 @@ function register(e) {
             newUser = new User(inputEmail = registerForm.elements.email.value, inputPassword = registerForm.elements.password.value, inputfirstName = registerForm.elements.firstName.value, inputlastName = registerForm.elements.lastName.value);
             fetch("http://127.0.0.1:3000/addUser", {
                 method: "POST",
-
                 headers : {
                     "Content-type":"application/json"
                 },
@@ -36,14 +32,11 @@ function register(e) {
                     const html = await fetch("/public/login.html").then((response) => response.text());
                     document.getElementById("content").innerHTML = html;
                     alert(res)
-                    
                 })
         }
         else {
             alert("girdiğiniz  şifreler yanlış");
         }
     } catch(err) {
-        // console.log(err)
     }
-
 }
