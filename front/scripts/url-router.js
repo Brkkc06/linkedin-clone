@@ -141,7 +141,7 @@ function getPosts() {
                         Array.from(postDiv.getElementsByClassName("post-image"))[0].src = postMedia;
                     }
                     if (userProfilePhoto) {
-                        Array.from(postDiv.getElementsByClassName("img-anka "))[0].src = userProfilePhoto;
+                        Array.from(postDiv.getElementsByClassName("img-anka "))[0].src = await getFile(userProfilePhoto);
                     }
                     const accessKey = post.createdBy
                     Array.from(postDiv.getElementsByClassName("tfn "))[0].innerHTML = followedByUser;
@@ -171,7 +171,7 @@ function getProfilePhoto() {
 
             Array.from(document.getElementsByClassName("followersStrong"))[0].innerHTML = json.user.followers.length;
             if (userProfilePhoto) {
-                Array.from(document.getElementsByClassName("post-photo-style"))[0].src = userProfilePhoto
+                Array.from(document.getElementsByClassName("post-photo-style"))[0].src = await getFile(userProfilePhoto);
             }
             else {
                 Array.from(document.getElementsByClassName("post-photo-style"))[0].src = "assets/nonprofilephoto.png"
@@ -201,9 +201,9 @@ function getUserName() {
             Array.from(document.getElementsByClassName("modalUserName"))[0].innerHTML = userName
             const userProfile = json.user.profilePhoto;
             if (userProfile) {
-                Array.from(document.getElementsByClassName("modalImg"))[0].src = userProfile;
-                Array.from(document.getElementsByClassName("left-profile-photo"))[0].src = userProfile;
-                Array.from(document.getElementsByClassName("i-photo"))[0].src = userProfile;
+                Array.from(document.getElementsByClassName("modalImg"))[0].src = await getFile(userProfile);
+                Array.from(document.getElementsByClassName("left-profile-photo"))[0].src = await getFile(userProfile);
+                Array.from(document.getElementsByClassName("i-photo"))[0].src = await getFile(userProfile);
             }
             else[
                 Array.from(document.getElementsByClassName("modalImg"))[0].src = "assets/nonprofilephoto.png",

@@ -1,4 +1,3 @@
-
 const img = document.getElementsByClassName("editPhoto");
 let imgSrc,imgSrcBckground;
 async function saveUserImg(imgtype){
@@ -124,20 +123,30 @@ function createSkill() {
 
 function remove(element, skill) {
     let index = skills.indexOf(skill);
-    skills = [...skill.slice(0, index), ...skills.slice(index + 1)];
+    skills.splice(index, 1);
     element.parentElement.remove();
 }
 
 function addSkill(e) {
-    if(e.key =="Enter"){
+    if(e.key ==","){
         const skill = e.target.value.replace(/\s+/g,' ')
+        let index = skills.indexOf(skill);
+        const x = skill.split("");
+        x.pop();    
+        const y=  x.join("");
+        console.log(y);  
+        const newSkill =skill.split(",");
+        
+
+        
         if(skill.length > 1 && !skills.includes(skill)){
             skill.split(' , ').forEach(skill =>{
-                skills.push(skill)
+                skills.push(newSkill[0])
                 createSkill();
             });
         }
         e.target.value = "";
+    
     }
 }
 
@@ -180,8 +189,7 @@ function updateUser(e) {
                 backgroundPhoto: imgSrcBckground,
                 profilePhoto: imgSrc
             }
-
         }) 
-
     }).then()
+
 }

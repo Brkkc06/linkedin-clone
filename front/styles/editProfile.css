@@ -250,4 +250,7 @@ input[type="file"]{
 .changeSaveBtn:disabled{
     background-color: var(--colorcrema);
     color: var(--bordercolor);
+    cursor:no-drop;
+    border: none;
+    box-shadow: none;
 }

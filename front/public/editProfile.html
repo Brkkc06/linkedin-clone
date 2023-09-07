@@ -46,12 +46,12 @@
                         <p>Yetenek ismi Girin</p>
                         <div class="skillBox">
                             <ul class="ulChips">
-                                <input id="inputChips" type="text" placeholder="Yazınız..." onchange="onChangeInput()">
+                                <input id="inputChips" type="text" placeholder="Eklemek için , (virgül) tuşuna basınız..." onchange="onChangeInput()">
                             </ul>
                         </div>
                     </div>
                     <div class="detailsChips">
-                        <button type="button" id="removeButton">Hepsini Kaldır</button>
+                        <button type="button" id="removeButton" onclick=" removeButtonActivity(event),onChangeInput()" >Hepsini Kaldır</button>
                     </div>
                 </div>
             </div>

@@ -138,7 +138,7 @@ function getPosts() {
                         Array.from(postDiv.getElementsByClassName("post-image"))[0].src = postMedia;
                     }
                     if(userProfilePhoto){
-                        Array.from(postDiv.getElementsByClassName("img-anka "))[0].src = userProfilePhoto;
+                        Array.from(postDiv.getElementsByClassName("img-anka "))[0].src =await getFile(userProfilePhoto);
                        
                     }
                    
