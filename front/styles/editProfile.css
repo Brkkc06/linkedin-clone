@@ -110,8 +110,7 @@
 }
 #backgroundPhotoUpload{
     margin-top: 32rem;
-    font-size: 1rem;
-   
+    font-size: 1rem;  
 }
 input[type="file"]{
     display: none;
@@ -155,7 +154,6 @@ input[type="file"]{
     border-radius: 10px;
     padding: 18px 25px 20px;
     border-top: 1px solid var(--bordercolor);
-   
 }
 .wrapperChips :where(.titleChips,li,li i, .detailsChips) {
     display: flex;
@@ -181,7 +179,6 @@ input[type="file"]{
     margin:12px 0;
     border-radius: 5px;
     border: 1px solid #a6a6a6;
-   
 }
 .contentChips ul li{
     list-style: none;
@@ -218,7 +215,6 @@ input[type="file"]{
 }
 .wrapperChips .detailsChips{
     justify-content: end;
-
 }
 .detailsChips button{
     border: none;
