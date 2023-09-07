@@ -13,30 +13,18 @@
     --bodybgc: #f3f2ef;
     --grey: #666;
 }
-
 .jw-modal {
-    /* modals are hidden by default */
     display: none;
-
-    /* modal container fixed across whole screen */
     position: fixed;
     inset: 0;
-
-    /* z-index must be higher than everything else on the page */
     z-index: 10000;
-
-    /* semi-transparent black background exposed by padding */
     background-color: rgba(0, 0, 0, .75);
     padding: 40px;
-
-    /* enables scrolling for tall modals */
     overflow: auto;
 }
-
 .jw-modal.open {
     display: block;
 }
-
 .jw-modal-body {
     width: 50%;
     background: #fff;
@@ -44,7 +32,6 @@
     margin: auto;
     border-radius: 5px;
 }
-
 .modalInput {
     display: flex;
     margin-bottom: 5px;
@@ -55,29 +42,24 @@
     padding-right: 15px;
     outline: none;
 }
-
 .modalPhoto img {
     border-radius: 50%;
     object-fit: cover;
     width: 5.6rem;
     height: 5.6rem;
 }
-
 .photoCard {
     display: flex;
     width: 744px;
 }
-
 .modalPhoto {
     display: flex;
 }
-
 .modalProfileInfo {
     margin-left: 0.4rem;
     padding-left: 0.8rem;
     align-self: center;
 }
-
 .fa-xmark {
     width: 4rem;
     height: 4rem;
@@ -87,16 +69,13 @@
     align-items: center;
     color: var(--googledarkgrey);
 }
-
 .modalCrossIcon i:hover {
     border-radius: 50%;
     background-color: var(--bodybgc);
 }
-
 .modalCrossIcon {
     padding-left: 15rem;
 }
-
 .btnModals {
     display: flex;
     border: none;
@@ -104,16 +83,13 @@
     background-color: #fff;
     border-radius: 5px;
 }
-
 .btnModals:hover {
     background-color: var(--bodybgc);
 }
-
 .smileFaceEmoji a i {
     font-size: 2.5rem;
     color: var(--googledarkgrey);
 }
-
 .smileFaceEmoji {
     padding-left: 1.5rem;
     border-radius: 50%;
@@ -124,7 +100,6 @@
     justify-content: center;
     margin: 0px 15px 10px 15px;
 }
-
 .smileFaceEmoji a {
     width: 4rem;
     height: 4rem;
@@ -134,11 +109,9 @@
     border-radius: 50%;
     text-decoration: none;
 }
-
 .smileFaceEmoji a:hover {
     background-color: var(--bodybgc);
 }
-
 .modalShareIcon {
     display: flex;
     list-style-type: none;
@@ -146,7 +119,6 @@
     padding-left: 5px;
     border-bottom: 1px solid var(--googlegrey);
 }
-
 .modalShareIcon li {
     margin-left: 5px;
     margin-right: 5px;
@@ -163,19 +135,15 @@
     transition: ease 0.15s;
     cursor: pointer;
 }
-
 .modalShareIcon li:hover {
     box-shadow: 0 4px 2px 3px var(--hoverkremi);
 }
-
 .modalShareIcon li a i {
     color: var(--grey);
 }
-
 .clockButton i {
     font-size: 2rem;
 }
-
 .clockButton {
     margin-right: 5px;
     border: none;
@@ -186,18 +154,15 @@
     background-color: var(--bgc);
     transition: ease 0.3s;
 }
-
 .clockButton:hover {
     background-color: var(--hoverkremi);
 }
-
 .modalBottomDiv {
     display: flex;
     justify-content: end;
     align-items: center;
     padding-right: 15px;
 }
-
 .ShareButton {
     width: 9rem;
     height: 3.2rem;
@@ -214,12 +179,10 @@
     transition: ease 0.3s;
     cursor:not-allowed;
 }
-
 .ShareButton:hover {
     background-color: var(--linkedinlacivert);
     color: var(--bgc);
 }
-
 .ShareButton:disabled{
     background-color:var(--hoverkremi);
 }
