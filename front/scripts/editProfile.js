@@ -61,8 +61,7 @@ function getProfileInfo() {
             else {
                 Array.from(document.getElementsByClassName("editPhoto"))[0].src = "assets/nonprofilephoto.png"
             }
-            if (getBackgroundPhoto) {
-              
+            if (getBackgroundPhoto) {       
                 Array.from(document.getElementsByClassName("editBackground"))[0].src =   await getFile(getBackgroundPhoto);
             }
             else {
