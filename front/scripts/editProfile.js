@@ -190,6 +190,8 @@ function updateUser(e) {
                 profilePhoto: imgSrc
             }
         }) 
-    }).then()
+    }).then(res => {
+        res.json().then(async json => alert(json.message))
+    })
 
 }

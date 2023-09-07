@@ -85,12 +85,12 @@ app.post("/updateUser",(req,res) =>{
         user
     )
     .then((result) => {
-        // console.error(result)
-        // response.send("başarıyla kaydedildi.")
-        console.log("kaydedildi.")
-    }).catch((err)=>[
+        
+        res.send({message:"başarıyla kaydedildi."})
+        
+    }).catch((err)=>{
         console.error(err)
-    ])
+    })
 })
 
 
