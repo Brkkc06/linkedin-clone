@@ -10,10 +10,8 @@ const  fs = require('fs');
 const fileupload = require('express-fileupload');
 const port = 3000
 let db;
-
 mongoose.connect('mongodb://127.0.0.1:27017/userDB',{useNewUrlParser:true});
 mongoose.Promise = global.Promise;
-
 app.use(bodyParser.urlencoded({ extended:false}));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/images'))
@@ -23,12 +21,9 @@ app.use(cors({
 ),
 fileupload()
 );
-
 app.get("/getFile", (req, res) => {
     res.sendFile(req.query.src)
-
 });
-
 app.post('/addUser',(req,res) => {
     // console.log(req.body)
     const newUser = new User(req.body.newUser);
@@ -48,12 +43,9 @@ app.post("/saveImg", (req,res) => {
     const filePath = `C:\\Users\\tuozm\\OneDrive\\Masaüstü\\linkedin c\\back\\images\\${fileName}`;
     fs.writeFile(filePath, req.files.image.data, (err, result) => {
         if(err) res.status(500);
-        else res.send(filePath);
-        
+        else res.send(filePath);     
     })
-   
 })
-
 app.post("/addFollower",(req,res) =>{
   const follower = req.body.follower;
   const followed = req.body.followed;
@@ -61,22 +53,12 @@ app.post("/addFollower",(req,res) =>{
     {_id:follower},
     {$addToSet:
     {"followed":followed}}).then();
-
  UserModel.updateOne(
     {_id:followed},
     {$addToSet:
     {"followers":follower}})
-    
     .then();
-   
-        // bulunan kişinin takipçilerine follower'ı ekle
-        // UserModel.updateOne(newFollowed);
-    // })
-        // bulunan kişinin takipettiklerine followed'ı ekle
-    //     
-    // })
 })
-
 app.post("/updateUser",(req,res) =>{
     const loginUserId = req.body.loginUserId;
     const user = req.body.user;
@@ -85,20 +67,13 @@ app.post("/updateUser",(req,res) =>{
         user
     )
     .then((result) => {
-        
         res.send({message:"başarıyla kaydedildi."})
-        
     }).catch((err)=>{
         console.error(err)
     })
 })
-
-
-
 app.post("/login",(req,response)=> {
     UserModel.find({ email: req.body.email }).exec().then(result => {
-        // console.log('result:', result)
-
         if(result.length !=0){
             if( req.body.password != result[0].password ){
                 response.send({ message: "Yanlış şifre" })
@@ -111,33 +86,19 @@ app.post("/login",(req,response)=> {
             response.send({ message: "Kayıtlı olmayan e-posta-şifre" })
         }
     })
-    
 })
-
-
-// app.get("/get-user-1/:id",(req,res) =>{
-//     const id = req.params.id;
-//     // console.log(id);
-    
-// })
 app.post("/get-user-2",(req,res)=>{
-    // console.log(req.body._id)
         UserModel.find({ _id: req.body._id, }).exec().then(result => {
-            // console.log(result)
         })
 })
-
 app.get("/getAll", async (req,res) => {
       const result = await PostModel.find({});
-      res.send({ posts: result })
-      
+      res.send({ posts: result })    
     })
 app.get("/getUserById/:id" , async (req,res) => {
     const result = await UserModel.findOne({ _id : req.params.id}).exec();
     res.send({ user: result })
-    
 })
-
 const userSchema = new mongoose.Schema({
     firstName : String,
     lastName : String,
@@ -150,12 +111,9 @@ const userSchema = new mongoose.Schema({
     },
     password : String,
     profilePhoto: String,
-    backgroundPhoto:String,
-    
+    backgroundPhoto:String,  
 });
-
 const UserModel = mongoose.model('User',userSchema);
-
 class User {
     firstName;
     lastName;
@@ -166,7 +124,6 @@ class User {
     followed;
     backgroundPhoto;
     skills;
-
     constructor(user) {
         this.firstName = user.firstName;
         this.lastName = user.lastName;
@@ -179,8 +136,6 @@ class User {
         this.skills = user.skills;
     }
 }
-
-
 class Post {
     constructor(createdBy,text,media,createdDate,likedBy){
         this.createdBy = createdBy,
@@ -188,11 +143,8 @@ class Post {
         this.media = media,
         this.createdDate = createdDate;
         this.likedBy = likedBy;
-    }
-    
+    }   
 }
-
-
 const postSchema = new mongoose.Schema({
     createdBy: String,
     text: String,
@@ -201,26 +153,10 @@ const postSchema = new mongoose.Schema({
     likedBy : String,
 });
 const PostModel = mongoose.model('Post',postSchema);
-
-
-
-
-
 app.post('/addPost',(req,res) => {
-     // console.log(req.body)
      const newPost = new Post(req.body.newPost.createdBy,req.body.newPost.text,req.body.newPost.media, new Date().getTime(),req.body.newPost.likedBy);
-     // console.log(newPost)
      PostModel.create(newPost).then((data)=>{
        res.status(201).send("successfully shared");
     })
-    
 })
-
-
-
-
-
-
-app.listen(port, () => {
-    // console.log(`Example app listening on port ${port}`)
-})
+app.listen(port, () => {})
