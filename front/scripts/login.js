@@ -32,19 +32,3 @@ function login(e) {
         })
     })
 }
-function getButtonBrk(e) {
-    const accessKey = event.target.accessKey;
-    const loginUserId = sessionStorage.getItem("userId");
-    fetch("http://127.0.0.1:3000/addFollower",{
-        method:"POST",
-        headers:{
-            "content-type":"application/json"
-        },
-        body:JSON.stringify({
-           follower: loginUserId,
-           followed: accessKey,
-         })
-    }).then((res) => res.text()).then(async (res) =>{
-        alert(res);
-    })
-}
