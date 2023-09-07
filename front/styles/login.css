@@ -40,7 +40,6 @@
     display: flex;
     justify-content: space-between;
     padding-top: 5rem;
-    
     padding-left: 15%;
     padding-right: 15%;
 }
@@ -121,7 +120,6 @@
     border-color: var(--grirenk);
     border-radius: 15px;
     height: 30px;
-    
     cursor:pointer;
     transition: ease 0.5s;   
 }
@@ -163,7 +161,6 @@
 #loginform input {
     padding-left: 20px;
     font-size: 1.4rem;
-
 }
 .login-text{
     font-size: 1.6rem;
