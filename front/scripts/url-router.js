@@ -1,6 +1,4 @@
-
 const urlPageTitle = "JS SPA  Routing";
-
 const urlRoutes = {
     404: {
         template: "/public/404.html",
@@ -37,29 +35,20 @@ const urlRoutes = {
         title:"404 |" + urlPageTitle,
         description:"This is edit profile page"
     },
-
-
 }
-
 const urlRoute = (event) => {
-    // event = event || window.event;
     event.preventDefault();
-
     window.history.pushState({}, "", event.target.href);
     urlLocationHandler();
-
 }
-
 const urlLocationHandler = async () => {
     let location = window.location.pathname;
     if (location === "/") {
         location = "/feed";
     }
-
     const route = urlRoutes[location] || urlRoutes[404];
     const html = await fetch(route.template).then((response) => response.text());
     document.getElementById("content").innerHTML = html;
-
     if (route.template === "/public/feed.html") {
         getPosts()
         getProfilePhoto()
@@ -69,23 +58,17 @@ const urlLocationHandler = async () => {
         getProfileInfo();
         startEditProfile();
     }
-
     document.title = route.title;
     document.querySelector('meta[name="description"]').setAttribute("content", route.description);
 }
-
 urlLocationHandler();
-
-
 function getPosts() {
     const loginUserId = sessionStorage.getItem("userId");
-
     fetch("http://127.0.0.1:3000/getAll", {
         method: "GET",
         headers: {
             "Content-type": "application/json"
         },
-
     }).then(res => {
         res.json().then(async json => {
             const posts = json.posts;
@@ -106,7 +89,6 @@ function getPosts() {
                     const userName = json.user.firstName.charAt(0).toUpperCase() + json.user.firstName.slice(1) + '\xa0' + json.user.lastName.charAt(0).toUpperCase() + json.user.lastName.slice(1);
                     const userProfilePhoto = json.user.profilePhoto;
                     const followedByUser = json.user.followers.length + '\xa0' + "Takipçi";
-
                     const postMedia = post.media;
                     const postText = post.text;
                     const postFollowedByUser = json.user.followed;
@@ -150,14 +132,10 @@ function getPosts() {
                     postsDiv.appendChild(postDiv);
                 }
             }
-
-            // alert(json.text)
         }).catch(err => {
-            // console.log(err);
         })
     })
 }
-
 function getProfilePhoto() {
     const loginUserId = sessionStorage.getItem("userId");
     fetch(`http://127.0.0.1:3000/getUserById/${loginUserId}`, {
@@ -168,7 +146,6 @@ function getProfilePhoto() {
     }).then((res) => {
         res.json().then(async json => {
             const userProfilePhoto = json.user.profilePhoto;
-
             Array.from(document.getElementsByClassName("followersStrong"))[0].innerHTML = json.user.followers.length;
             if (userProfilePhoto) {
                 Array.from(document.getElementsByClassName("post-photo-style"))[0].src = await getFile(userProfilePhoto);
@@ -176,7 +153,6 @@ function getProfilePhoto() {
             else {
                 Array.from(document.getElementsByClassName("post-photo-style"))[0].src = "assets/nonprofilephoto.png"
             }
-            
             if (loginUserId != null) {
                 Array.from(document.getElementsByClassName("logInLogOut"))[0].innerHTML = "Çıkış"
             }
@@ -186,7 +162,6 @@ function getProfilePhoto() {
         })
     })
 }
-
 function getUserName() {
     const loginUserId = sessionStorage.getItem("userId");
     fetch(`http://127.0.0.1:3000/getUserById/${loginUserId}`, {
@@ -210,26 +185,12 @@ function getUserName() {
                 Array.from(document.getElementsByClassName("left-profile-photo"))[0].src = "assets/nonprofilephoto.png",
                 Array.from(document.getElementsByClassName("i-photo"))[0].src = "assets/nonprofilephoto.png"
             ]
-
         })
     })
-
 }
-
-
-
-
-
-
-
-
-
-
-
 function getButtonBrk(e) {
     const accessKey = event.target.accessKey;
     const loginUserId = sessionStorage.getItem("userId");
-
     fetch("http://127.0.0.1:3000/addFollower", {
         method: "POST",
         headers: {
@@ -243,4 +204,3 @@ function getButtonBrk(e) {
         alert(res);
     })
 }
-
