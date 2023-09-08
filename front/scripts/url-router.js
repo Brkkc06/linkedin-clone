@@ -173,10 +173,13 @@ function getUserName() {
         res.json().then(async json => {
             const userName = json.user.firstName.charAt(0).toUpperCase() + json.user.firstName.slice(1) + '\xa0' + json.user.lastName.charAt(0).toUpperCase() + json.user.lastName.slice(1);
             const userBckgroundPhoto = json.user.backgroundPhoto;
-            if(userBckgroundPhoto){
-                Array.from(document.getElementsByClassName("p-cap-photo"))[0].src =await getFile(userBckgroundPhoto);
+            const userCompanyOrShcool = json.user.companyOrSchool;
+            const userDepartment = json.user.department;
+            if(userCompanyOrShcool){
+                Array.from(document.getElementsByClassName("ptag-profile"))[0].innerHTML =userCompanyOrShcool
+                Array.from(document.getElementsByClassName("departmentText"))[0].innerHTML =userDepartment
             }
-
+            if(userBckgroundPhoto) Array.from(document.getElementsByClassName("p-cap-photo"))[0].src =await getFile(userBckgroundPhoto);
             Array.from(document.getElementsByClassName("profile-name-text"))[0].innerHTML = userName
             Array.from(document.getElementsByClassName("modalUserName"))[0].innerHTML = userName
             const userProfile = json.user.profilePhoto;

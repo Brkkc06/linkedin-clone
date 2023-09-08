@@ -247,3 +247,23 @@ input[type="file"]{
     border: none;
     box-shadow: none;
 }
+.divUserInfo{
+    margin:1.2rem 0 0rem 2.7rem;
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+.userInfo{
+    font-size: 1.5rem;
+    border-radius: 0.8rem;
+    padding-left: 0.5rem;
+    padding-top: 0.2rem;
+    height:3rem;
+}
+.userDepartment{
+    font-size: 1.5rem;
+    border-radius: 0.8rem;
+    padding-left: 0.5rem;
+    padding-top: 0.2rem;
+    height:3rem;
+}

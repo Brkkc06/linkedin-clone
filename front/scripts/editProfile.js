@@ -55,18 +55,14 @@ function getProfileInfo() {
             const getPass = json.user.password;
             const getBackgroundPhoto = json.user.backgroundPhoto;
             const getSkills = json.user.skills;
-            if (getProfilePhoto) {
-                Array.from(document.getElementsByClassName("editPhoto"))[0].src =  await getFile(getProfilePhoto);
-            }
-            else {
-                Array.from(document.getElementsByClassName("editPhoto"))[0].src = "assets/nonprofilephoto.png"
-            }
-            if (getBackgroundPhoto) {       
-                Array.from(document.getElementsByClassName("editBackground"))[0].src =   await getFile(getBackgroundPhoto);
-            }
-            else {
-                Array.from(document.getElementsByClassName("editBackground"))[0].src = "assets/cap-photo.svg"
-            }
+            const getdepartment = json.user.department;
+            const getCompanyOrSchool = json.user.companyOrSchool;
+            if(getdepartment) Array.from(document.getElementsByClassName("userDepartment"))[0].value = getdepartment;
+            if(getCompanyOrSchool) Array.from(document.getElementsByClassName("userInfo"))[0].value = getCompanyOrSchool;
+            if (getProfilePhoto) Array.from(document.getElementsByClassName("editPhoto"))[0].src =  await getFile(getProfilePhoto);        
+            else Array.from(document.getElementsByClassName("editPhoto"))[0].src = "assets/nonprofilephoto.png"   
+            if (getBackgroundPhoto) Array.from(document.getElementsByClassName("editBackground"))[0].src =   await getFile(getBackgroundPhoto);     
+            else Array.from(document.getElementsByClassName("editBackground"))[0].src = "assets/cap-photo.svg"
             Array.from(document.getElementsByClassName("editFirstName"))[0].value = getFirstName;
             Array.from(document.getElementsByClassName("editLastName"))[0].value = getLastName;
             Array.from(document.getElementsByClassName("editEmail"))[0].value = getMail;
@@ -74,7 +70,7 @@ function getProfileInfo() {
             if(getSkills){
                 const ul = document.getElementsByClassName("ulChips");
                 getSkills.forEach(skill => {
-                    let liSkill = `<li>${skill} <i class="fa-solid fa-xmark fa-2xs"  onclick="remove(this,'${skill}')"></i></li>`;
+                    let liSkill = `<li>${skill} <i class="fa-solid fa-xmark fa-2xs"  onclick="remove(this,'${skill}');onChangeInput();"></i></li>`;
                     ul[0].insertAdjacentHTML("afterbegin", liSkill);
                     skills.push(skill) 
                 })
@@ -91,8 +87,8 @@ function startEditProfile() {
 function createSkill() {
     const ul = document.getElementsByClassName("ulChips");
     ul[0].querySelectorAll("li").forEach(li => li.remove());
-    skills.slice().reverse().forEach(skill => {
-        let liSkill = `<li>${skill} <i class="fa-solid fa-xmark fa-2xs"  onclick="remove(this,'${skill}')"></i></li>`;
+    skills.reverse().forEach(skill => {
+        let liSkill = `<li>${skill} <i class="fa-solid fa-xmark fa-2xs"  onclick="remove(this,'${skill};onChangeInput();')"></i></li>`;
         ul[0].insertAdjacentHTML("afterbegin", liSkill);
     })
 }
@@ -101,27 +97,28 @@ function remove(element, skill) {
     skills.splice(index, 1);
     element.parentElement.remove();
 }
-function addSkill(e) {
+function addSkill(e) { 
     if(e.key ==","){
-        const skill = e.target.value.replace(/\s+/g,' ')
-        let index = skills.indexOf(skill);
-        const x = skill.split("");
-        x.pop();    
-        const y=  x.join("");
-        console.log(y);  
-        const newSkill =skill.split(",");
-        if(skill.length > 1 && !skills.includes(skill)){
-            skill.split(' , ').forEach(skill =>{
-                skills.push(newSkill[0])
-                createSkill();
+        const skill = e.target.value.replace(/\s+/g,' ')   
+        const newSkill =skill.split("");
+        newSkill.pop()
+        const newSkillJoin = newSkill.join("");
+        if(newSkillJoin.length > 1 && !skills.includes(newSkillJoin)){
+            newSkillJoin.split(",").forEach(newSkillJoin =>{
+                if(skills.includes(newSkillJoin) == false){
+                    skills.push(newSkillJoin)
+                    console.log(skills)
+                    createSkill();
+                }
             });
         }
+        onChangeInput();
         e.target.value = "";
     }
 }
 function removeButtonActivity(event) {
     const ul = document.getElementsByClassName("ulChips");
-    skills.length = 0;
+    skills = []
     ul[0].querySelectorAll("li").forEach(li => li.remove());
 }
 function onChangeInput() {
@@ -134,9 +131,9 @@ function updateUser(e) {
     const updateLastName = document.getElementsByClassName("editLastName")[0].value;
     const updateEmail = document.getElementsByClassName("editEmail")[0].value;
     const updatePass = document.getElementsByClassName("editPass")[0].value;
-    const updateBackground = document.getElementsByClassName("editBackground")[0].src;
-    const updateProfilePhoto = document.getElementsByClassName("editPhoto")[0].src;
     const updateSkill = skills;
+    const updateCompanyOrSchool =document.getElementsByClassName("userInfo")[0].value;
+    const updateDepartment = document.getElementsByClassName("userDepartment")[0].value;
     fetch("http://127.0.0.1:3000/updateUser", {
         method: "Post",
         headers: {
@@ -151,7 +148,9 @@ function updateUser(e) {
                 password: updatePass,
                 skills: updateSkill,
                 backgroundPhoto: imgSrcBckground,
-                profilePhoto: imgSrc
+                profilePhoto: imgSrc,
+                companyOrSchool: updateCompanyOrSchool,
+                department: updateDepartment
             }
         }) 
     }).then(res => {

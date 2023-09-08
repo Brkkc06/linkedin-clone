@@ -46,12 +46,14 @@
                         <p>Yetenek Girin</p>
                         <div class="skillBox">
                             <ul class="ulChips">
-                                <input id="inputChips" type="text" placeholder="Eklemek için , (virgül) tuşuna basınız..." onchange="onChangeInput()">
+                                <input id="inputChips" type="text"
+                                    placeholder="Eklemek için , (virgül) tuşuna basınız..." onchange="onChangeInput()">
                             </ul>
                         </div>
                     </div>
                     <div class="detailsChips">
-                        <button type="button" id="removeButton" onclick=" removeButtonActivity(event),onChangeInput()" >Hepsini Kaldır</button>
+                        <button type="button" id="removeButton"
+                            onclick="removeButtonActivity(event); onChangeInput()">Hepsini Kaldır</button>
                     </div>
                 </div>
             </div>
@@ -60,14 +62,27 @@
             <div class="editBackgroundPhoto">
                 <img class="editBackground">
                 <input type="file" id="backgroundPhotoUpload" multiple accept="image/*">
-                <label for="backgroundPhotoUpload" class="backgroundPhotoLabel">
-                    <i class="fa-solid fa-upload"></i> &nbsp;
-                    Dosya Seçin veya Sürükleyin
-                </label>
-                <button type="button" class="backGroundChangeButton"
-                    onclick="BackgroundHandleSubmit(event),onChangeInput()">Yükle</button>
+                <diV style="border-bottom: 1px solid var(--googlegrey);padding-bottom: 1.5rem;">
+                    <label for="backgroundPhotoUpload" class="backgroundPhotoLabel">
+                        <i class="fa-solid fa-upload"></i> &nbsp;
+                        Dosya Seçin veya Sürükleyin
+                    </label>
+                    <button type="button" class="backGroundChangeButton"
+                        onclick="BackgroundHandleSubmit(event),onChangeInput()">Yükle</button>
+                </diV>
+            </div>
+            <div>
+                <div class="divUserInfo">
+                    <label for="userInfo">Şu an nerede çalışıyorsun/okuyorsun ?</label>
+                    <input name="userInfo" style="resize:none" class="userInfo" rows="8" cols="60" type="text" onchange="onChangeInput()">
+                </div>
+                <div class="divUserInfo">
+                    <label for="userDepartment">Görevi/Bölümü</label>
+                    <input name="userInfo" style="resize:none" class="userDepartment" rows="8" cols="60" type="text" onchange="onChangeInput()">
+                </div>
             </div>
         </div>
+
     </div>
     <div class="changeSave">
         <button type="submit" class="changeSaveBtn" disabled>Değişiklikleri Kaydet</button>

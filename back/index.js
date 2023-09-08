@@ -8,6 +8,7 @@ const cors = require('cors');
 const app = express();
 const  fs = require('fs');
 const fileupload = require('express-fileupload');
+const { strict } = require('assert');
 const port = 3000
 let db;
 mongoose.connect('mongodb://127.0.0.1:27017/userDB',{useNewUrlParser:true});
@@ -111,7 +112,9 @@ const userSchema = new mongoose.Schema({
     },
     password : String,
     profilePhoto: String,
-    backgroundPhoto:String,  
+    backgroundPhoto:String,
+    companyOrSchool:String,
+    department:String,  
 });
 const UserModel = mongoose.model('User',userSchema);
 class User {
@@ -124,6 +127,8 @@ class User {
     followed;
     backgroundPhoto;
     skills;
+    companyOrSchool;
+    department
     constructor(user) {
         this.firstName = user.firstName;
         this.lastName = user.lastName;
@@ -134,6 +139,8 @@ class User {
         this.followed = user.followed;
         this.backgroundPhoto = user.backgroundPhoto;
         this.skills = user.skills;
+        this.companyOrSchool = user.companyOrSchool;
+        this.department = user.department;
     }
 }
 class Post {
