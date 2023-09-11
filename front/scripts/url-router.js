@@ -120,7 +120,7 @@ function getPosts() {
                         for (const likethisDiv of postDiv.getElementsByClassName("likethis"))
                             likethisDiv.style.display = "none";
                     if (postMedia) {
-                        Array.from(postDiv.getElementsByClassName("post-image"))[0].src = postMedia;
+                        Array.from(postDiv.getElementsByClassName("post-image"))[0].src = await getFile(postMedia);  
                     }
                     if (userProfilePhoto) {
                         Array.from(postDiv.getElementsByClassName("img-anka "))[0].src = await getFile(userProfilePhoto);

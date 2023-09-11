@@ -28,7 +28,7 @@
 .jw-modal-body {
     width: 50%;
     background: #fff;
-    height: 90%;
+    height:auto;
     margin: auto;
     border-radius: 5px;
 }
@@ -185,4 +185,16 @@
 }
 .ShareButton:disabled{
     background-color:var(--hoverkremi);
+}
+.imageDivInModal{
+    display: flex;
+    justify-content: center;
+}
+.imageInPostModal{
+    height: auto;
+    margin: 0;
+    padding: 0;
+    max-width: 71.2rem;
+    display: flex;
+    justify-content: center;
 }

@@ -10,12 +10,13 @@ class Post{
 function openModal() {
     document.getElementById('modal-1').classList.add('open');
     const input = document.querySelector("textarea");
+    const image = document.getElementsByClassName("imageInPostModal")[0];
     const log = document.getElementById("modalInput");
     input.addEventListener("input", updateValue);
-    const  buttonActivity = document.getElementById("ShareButton");
+    const  buttonActivity = document.getElementById("ShareButton");  
     function updateValue() {
         log.textContent = event.target.value;
-        if(event.target.value == ""){
+        if(event.target.value == "" && image.src == ""){
             buttonActivity.disabled=true;
         }
         else{
@@ -78,7 +79,9 @@ function sharePost(e){
     e.preventDefault()   
     postForm = document.getElementById('postForm');
     inputText = postForm.elements.modalInput.value;
-    newPost = new Post(sessionStorage.getItem("userId"), inputText);
+    newPost = new Post(sessionStorage.getItem("userId"), inputText,imgSrcSharePhoto);
+    media = newPost.media;
+    console.log(media)
     fetch("http://127.0.0.1:3000/addPost",{
         method:"POST",
         headers: {

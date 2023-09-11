@@ -1,11 +1,19 @@
 const img = document.getElementsByClassName("editPhoto");
-let imgSrc,imgSrcBckground;
+let imgSrc,imgSrcBckground,imgSrcSharePhoto;
 async function saveUserImg(imgtype){
     const formData = new FormData();
     formData.append("image", document.getElementById(imgtype).files[0]);
     fetch("http://127.0.0.1:3000/saveImg", {method: "post", body: formData}).then(async (res) => {
-        if(imgtype === "profilePhotoUpload") imgSrc = await res.text()        
-        else imgSrcBckground =await res.text()
+        const resultSrc = await res.text();
+        if(imgtype === "profilePhotoUpload") {
+            imgSrc = resultSrc;
+        }        
+        else if(imgtype === "sharePhotoInFeedPage"){
+            imgSrcSharePhoto = resultSrc;
+        }
+        else if (imgtype === "backgroundPhotoUpload" ) {
+            imgSrcBckground = resultSrc;
+        } 
     });
 }
 function logFile(event) {
@@ -32,6 +40,19 @@ function logFileBackground(event) {
 function BackgroundHandleSubmit(event) {
     event.preventDefault();
     logFileBackground(event);
+}
+function fileUploadDone() {
+    logFileSharePhoto();
+    document.getElementById("ShareButton").style.disabled="false"
+}
+function logFileSharePhoto(){
+    var readerSharePhoto = new FileReader();
+    readerSharePhoto.onload = function(event){
+        document.getElementsByClassName("imageInPostModal")[0].src = event.target.result;
+        
+    };
+    readerSharePhoto.readAsDataURL(document.getElementById("sharePhotoInFeedPage").files[0]);
+    saveUserImg("sharePhotoInFeedPage");
 }
 async function getFile(imgsrc){
     const url = encodeURIComponent(imgsrc) 

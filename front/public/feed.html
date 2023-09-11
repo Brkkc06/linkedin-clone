@@ -162,8 +162,11 @@
                             </div>
                             <form id="postForm" onsubmit="sharePost(event)">
                                 <label for="modalText" style="margin-bottom: 5px; font-size: 1.5rem;"></label>
-                                <textarea rows="8" cols="60" type="text" placeholder="Ne hakkında konuşmak istiyorsunuz ?" name="modalText"
-                                    class="modalInput" id="modalInput" style="resize:none"></textarea>
+                                <textarea rows="4" cols="60" type="text" placeholder="Ne hakkında konuşmak istiyorsunuz ?" name="modalText"
+                                class="modalInput" id="modalInput" style="resize:none" ></textarea>
+                                <div class="imageDivInModal">
+                                    <img class="imageInPostModal">
+                                </div>
                                 <div>
                                     <div class="smileFaceEmoji" style="padding-left: 5px;">
                                         <a href="#">
@@ -208,10 +211,13 @@
                     </div>
                 </div>
                 <div class="post-toolbar">
-                    <button type="button" class="btn btn-toolbar">
-                        <i class="fa-regular fa-image" style="color: #378fe9;" class="share-photo"></i>
-                        <span class="fotograf">Fotoğraf</span>
-                    </button>
+                    <div class="btn-toolbar" >
+                        <input type="file" id="sharePhotoInFeedPage" multiple accept="image/*" onclick="openModal()" onchange="fileUploadDone()">
+                        <label for="sharePhotoInFeedPage" class="fotograf">
+                            <i class="fa-regular fa-image" style="color: #378fe9;" class="share-photo"></i>
+                            Fotoğraf
+                        </label>
+                    </div>
                     <button type="button" class="btn btn-toolbar">
                         <i class="fa-brands fa-youtube" style="color: #5f9b41;"></i>
                         <span class="fotograf">Video</span>
