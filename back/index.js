@@ -26,9 +26,9 @@ app.get("/getFile", (req, res) => {
     res.sendFile(req.query.src)
 });
 app.post('/addUser',(req,res) => {
-    // console.log(req.body)
+    
     const newUser = new User(req.body.newUser);
-    // console.log(newUser)
+   
     UserModel.create(newUser).then((data)=>{
         res.status(201).send("successfully saved");
     }).catch(err => {
@@ -163,7 +163,7 @@ const postSchema = new mongoose.Schema({
 const PostModel = mongoose.model('Post',postSchema);
 app.post('/addPost',(req,res) => {
      const newPost = new Post(req.body.newPost.createdBy,req.body.newPost.text,req.body.newPost.media, new Date().getTime(),req.body.newPost.likedBy);
-     console.log(req.body.newPost.media);
+     
      PostModel.create(newPost).then((data)=>{
        res.status(201).send("successfully shared");
     })

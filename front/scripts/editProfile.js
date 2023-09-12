@@ -150,7 +150,6 @@ function addSkill(e) {
             newSkillJoin.split(",").forEach(newSkillJoin =>{
                 if(skills.includes(newSkillJoin) == false){
                     skills.push(newSkillJoin)
-                    console.log(skills)
                     createSkill();
                 }
             });
