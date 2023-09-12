@@ -1,8 +1,11 @@
 const img = document.getElementsByClassName("editPhoto");
-let imgSrc,imgSrcBckground,imgSrcSharePhoto;
+let imgSrc,imgSrcBckground,imgSrcSharePhoto,videoSrcShareVideo;
 async function saveUserImg(imgtype){
+    const fileExtension = document.getElementById(imgtype).files[0].name.split(".")
+    const extension = fileExtension.slice(-1);
     const formData = new FormData();
     formData.append("image", document.getElementById(imgtype).files[0]);
+    formData.append("extension",extension)
     fetch("http://127.0.0.1:3000/saveImg", {method: "post", body: formData}).then(async (res) => {
         const resultSrc = await res.text();
         if(imgtype === "profilePhotoUpload") {
@@ -14,6 +17,9 @@ async function saveUserImg(imgtype){
         else if (imgtype === "backgroundPhotoUpload" ) {
             imgSrcBckground = resultSrc;
         } 
+        else if (imgtype ==="shareVideoInFeedPage") {
+            videoSrcShareVideo = resultSrc
+        }
     });
 }
 function logFile(event) {
@@ -43,17 +49,33 @@ function BackgroundHandleSubmit(event) {
 }
 function fileUploadDone() {
     logFileSharePhoto();
-    document.getElementById("ShareButton").style.disabled="false"
+    document.getElementById("ShareButton").disabled= false;
 }
 function logFileSharePhoto(){
     var readerSharePhoto = new FileReader();
     readerSharePhoto.onload = function(event){
-        document.getElementsByClassName("imageInPostModal")[0].src = event.target.result;
-        
+        document.getElementsByClassName("imageInPostModal")[0].src = event.target.result; 
     };
     readerSharePhoto.readAsDataURL(document.getElementById("sharePhotoInFeedPage").files[0]);
     saveUserImg("sharePhotoInFeedPage");
 }
+function logFileShareVideo(){
+    var readerShareVideo = new FileReader();
+    readerShareVideo.onload = function(event){
+        document.getElementById("videoTag").src = event.target.result;
+    }
+    readerShareVideo.readAsDataURL(document.getElementById("shareVideoInFeedPage").files[0]);
+    saveUserImg("shareVideoInFeedPage");
+    
+}
+const b64toBlob = (base64 = 'application/octet-stream') => 
+  fetch(base64).then(res => res.blob())
+function videoUploadDone(){
+    logFileShareVideo();
+    document.getElementById("ShareButton").disabled = false;
+    document.getElementById("videoTag").style.display = "block"
+}
+
 async function getFile(imgsrc){
     const url = encodeURIComponent(imgsrc) 
     const result = await fetch(`http://127.0.0.1:3000/getFile?src=${url}`)

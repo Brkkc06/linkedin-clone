@@ -10,13 +10,15 @@ class Post{
 function openModal() {
     document.getElementById('modal-1').classList.add('open');
     const input = document.querySelector("textarea");
+    const form = document.getElementById("postForm");
     const image = document.getElementsByClassName("imageInPostModal")[0];
+    const imageSrc = document.getElementsByClassName("imageInPostModal")[0].src;
     const log = document.getElementById("modalInput");
-    input.addEventListener("input", updateValue);
-    const  buttonActivity = document.getElementById("ShareButton");  
+    input.addEventListener("input" ,updateValue);
+    const  buttonActivity = document.getElementById("ShareButton");   
     function updateValue() {
         log.textContent = event.target.value;
-        if(event.target.value == "" && image.src == ""){
+        if(event.target.value == "" || imageSrc  ==""){
             buttonActivity.disabled=true;
         }
         else{
@@ -24,6 +26,7 @@ function openModal() {
         }
     }
 }
+
 function closeModal() {
     document.querySelector('.jw-modal.open').classList.remove('open');
 }
@@ -75,13 +78,13 @@ function getByUserId(){
         })
     })
 }
+// BACK-END E BURADAN GÖNDERECEKSİN.
 function sharePost(e){
-    e.preventDefault()   
+    e.preventDefault() 
     postForm = document.getElementById('postForm');
     inputText = postForm.elements.modalInput.value;
-    newPost = new Post(sessionStorage.getItem("userId"), inputText,imgSrcSharePhoto);
+    newPost = new Post(sessionStorage.getItem("userId"), inputText,videoSrcShareVideo);
     media = newPost.media;
-    console.log(media)
     fetch("http://127.0.0.1:3000/addPost",{
         method:"POST",
         headers: {

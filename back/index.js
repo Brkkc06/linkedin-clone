@@ -40,7 +40,8 @@ app.post('/addUser',(req,res) => {
     })
 })
 app.post("/saveImg", (req,res) => {
-    const fileName = `${Date.now()}.jpg`;
+    const extension = req.body.extension
+    const fileName = `${Date.now()}.${extension}`;
     const filePath = `C:\\Users\\tuozm\\OneDrive\\Masaüstü\\linkedin c\\back\\images\\${fileName}`;
     fs.writeFile(filePath, req.files.image.data, (err, result) => {
         if(err) res.status(500);

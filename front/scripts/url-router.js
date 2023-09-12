@@ -119,6 +119,7 @@ function getPosts() {
                     else
                         for (const likethisDiv of postDiv.getElementsByClassName("likethis"))
                             likethisDiv.style.display = "none";
+                    // POST VİDEO BURAYA EKLENECEK.    
                     if (postMedia) {
                         Array.from(postDiv.getElementsByClassName("post-image"))[0].src = await getFile(postMedia);  
                     }

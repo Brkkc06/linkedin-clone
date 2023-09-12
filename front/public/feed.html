@@ -160,12 +160,13 @@
                                     <i class="fa-solid fa-xmark"></i>
                                 </button>
                             </div>
-                            <form id="postForm" onsubmit="sharePost(event)">
+                            <form id="postForm" onsubmit="sharePost(event)" >
                                 <label for="modalText" style="margin-bottom: 5px; font-size: 1.5rem;"></label>
                                 <textarea rows="4" cols="60" type="text" placeholder="Ne hakkında konuşmak istiyorsunuz ?" name="modalText"
                                 class="modalInput" id="modalInput" style="resize:none" ></textarea>
                                 <div class="imageDivInModal">
-                                    <img class="imageInPostModal">
+                                    <img src="" class="imageInPostModal">
+                                    <video controls id="videoTag" style="display: none;" ></video>
                                 </div>
                                 <div>
                                     <div class="smileFaceEmoji" style="padding-left: 5px;">
@@ -175,11 +176,10 @@
                                     </div>
                                     <div>
                                         <ul class="modalShareIcon">
-                                            <li>
-                                                <a>
+                                                <input type="file" id="sharePhotoInFeedPage" multiple accept="image/*" onchange="fileUploadDone()"> 
+                                                <label for="sharePhotoInFeedPage" class="fotograf">
                                                     <i class="fa-regular fa-image"></i>
-                                                </a>
-                                            </li>
+                                                </label>
                                             <li>
                                                 <a href="#">
                                                     <i class="fa-solid fa-video"></i>
@@ -212,21 +212,24 @@
                 </div>
                 <div class="post-toolbar">
                     <div class="btn-toolbar" >
-                        <input type="file" id="sharePhotoInFeedPage" multiple accept="image/*" onclick="openModal()" onchange="fileUploadDone()">
-                        <label for="sharePhotoInFeedPage" class="fotograf">
-                            <i class="fa-regular fa-image" style="color: #378fe9;" class="share-photo"></i>
+                        <input type="file" id="sharePhotoInFeedPage" multiple accept="image/*"  onchange="fileUploadDone()">
+                        <label for="sharePhotoInFeedPage" class="fotograf" onclick="openModal()">
+                            <i class="fa-regular fa-image" style="color: #378fe9; margin-right: 16px;" class="share-photo"></i>
                             Fotoğraf
                         </label>
                     </div>
-                    <button type="button" class="btn btn-toolbar">
-                        <i class="fa-brands fa-youtube" style="color: #5f9b41;"></i>
-                        <span class="fotograf">Video</span>
-                    </button>
+                    <div class="btn-toolbar">
+                    <input type="file" id="shareVideoInFeedPage" multiple accept="video/*" onchange="videoUploadDone()">
+                    <label for="shareVideoInFeedPage" class="fotograf" onclick="openModal()">
+                        <i class="fa-brands fa-youtube" style="color: #5f9b41; margin-right: 16px;"></i>
+                        Video                   
+                    </label>
+                   </div>
                     <button type="button" class="btn btn-toolbar">
                         <i class="fa-solid fa-calendar-days" style="color: #c37d16;"></i>
                         <span class="fotograf">Etkinlik</span>
                     </button>
-                    <button type="button" class="btn btn-toolbar">
+                    <button type="button" class="btn btn-toolbar" onclick="openModal();">
                         <i class="fa-solid fa-pen-to-square" style="color: #e16745;"></i>
                         <span class="fotograf">Yazı yaz</span>
                     </button>
