@@ -967,3 +967,13 @@ html {
 .btn-brk svg {
     pointer-events:none;
 }
+.videoTagStyles{
+    display: none;
+    width: 71.2rem;
+    height: auto;
+}
+.videoTagStylesInFeedPage{
+    display: none;
+    width: 55.5rem;
+    height: auto;
+}
