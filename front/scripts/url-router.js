@@ -89,7 +89,9 @@ function getPosts() {
                     const userName = json.user.firstName.charAt(0).toUpperCase() + json.user.firstName.slice(1) + '\xa0' + json.user.lastName.charAt(0).toUpperCase() + json.user.lastName.slice(1);
                     const userProfilePhoto = json.user.profilePhoto;
                     const followedByUser = json.user.followers.length + '\xa0' + "Takipçi";
-                    const postMedia = post.media;
+                    const postMediaPhoto = post.mediaPhoto;
+                    const postMediaVideo = post.mediaVideo;
+                    // console.log(postMediaVideo)
                     const postText = post.text;
                     const postFollowedByUser = json.user.followed;
                     const postFollowersOfUser = json.user.followers;
@@ -118,10 +120,15 @@ function getPosts() {
                     }
                     else
                         for (const likethisDiv of postDiv.getElementsByClassName("likethis"))
-                            likethisDiv.style.display = "none";
-                    // POST VİDEO BURAYA EKLENECEK.    
-                    if (postMedia) {
-                        Array.from(postDiv.getElementsByClassName("post-image"))[0].src = await getFile(postMedia);  
+                            likethisDiv.style.display = "none";    
+                    if(postMediaVideo){
+                        Array.from(postDiv.getElementsByClassName("videoTagStylesInFeedPage"))[0].src = await getFile(postMediaVideo);
+                    }
+                    else
+                        for(const index of postDiv.getElementsByClassName("videoTagStylesInFeedPage"))
+                            index.style.display ="none";
+                    if (postMediaPhoto) {
+                        Array.from(postDiv.getElementsByClassName("post-image"))[0].src = await getFile(postMediaPhoto);  
                     }
                     if (userProfilePhoto) {
                         Array.from(postDiv.getElementsByClassName("img-anka "))[0].src = await getFile(userProfilePhoto);

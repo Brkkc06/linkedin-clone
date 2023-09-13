@@ -180,11 +180,10 @@
                                                 <label for="sharePhotoInFeedPage" class="fotograf">
                                                     <i class="fa-regular fa-image"></i>
                                                 </label>
-                                            <li>
-                                                <a href="#">
+                                            <input type="file" id="shareVideoInFeedPage" multiple accept="video/*" onchange="videoUploadDone()">
+                                                <label  for="shareVideoInFeedPage" class="fotograf">
                                                     <i class="fa-solid fa-video"></i>
-                                                </a>
-                                            </li>
+                                                </label>
                                             <li>
                                                 <a href="#">
                                                     <i class="fa-solid fa-calendar-days"></i>
@@ -211,20 +210,20 @@
                     </div>
                 </div>
                 <div class="post-toolbar">
-                    <div class="btn-toolbar" >
+                   
                         <input type="file" id="sharePhotoInFeedPage" multiple accept="image/*"  onchange="fileUploadDone()">
-                        <label for="sharePhotoInFeedPage" class="fotograf" onclick="openModal()">
+                        <label for="sharePhotoInFeedPage" class="fotograf btn-toolbar" onclick="openModal()">
                             <i class="fa-regular fa-image" style="color: #378fe9; margin-right: 16px;" class="share-photo"></i>
                             Fotoğraf
                         </label>
-                    </div>
-                    <div class="btn-toolbar">
+                    
+                
                     <input type="file" id="shareVideoInFeedPage" multiple accept="video/*" onchange="videoUploadDone()">
-                    <label for="shareVideoInFeedPage" class="fotograf" onclick="openModal()">
+                    <label for="shareVideoInFeedPage" class="fotograf btn-toolbar" onclick="openModal()">
                         <i class="fa-brands fa-youtube" style="color: #5f9b41; margin-right: 16px;"></i>
                         Video                   
                     </label>
-                   </div>
+                   
                     <button type="button" class="btn btn-toolbar">
                         <i class="fa-solid fa-calendar-days" style="color: #c37d16;"></i>
                         <span class="fotograf">Etkinlik</span>

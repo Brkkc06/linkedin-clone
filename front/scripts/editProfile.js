@@ -74,6 +74,7 @@ function videoUploadDone(){
     logFileShareVideo();
     document.getElementById("ShareButton").disabled = false;
     document.getElementById("videoTag").style.display = "block"
+    
 }
 
 async function getFile(imgsrc){

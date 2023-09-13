@@ -1,8 +1,9 @@
 class Post{
-    constructor(createdBy,text,media,createdDate,likedBy){
+    constructor(createdBy,text,mediaPhoto,mediaVideo,createdDate,likedBy){
         this.createdBy = createdBy
         this.text  = text;
-        this.media =media;
+        this.mediamediaPhoto =mediaPhoto;
+        this.mediaVideo = mediaVideo
         this.createdDate = createdDate;
         this.likedBy =likedBy
     }
@@ -83,15 +84,18 @@ function sharePost(e){
     e.preventDefault() 
     postForm = document.getElementById('postForm');
     inputText = postForm.elements.modalInput.value;
-    newPost = new Post(sessionStorage.getItem("userId"), inputText,videoSrcShareVideo);
-    media = newPost.media;
     fetch("http://127.0.0.1:3000/addPost",{
         method:"POST",
         headers: {
             "Content-type" : "application/json"
         },
         body:JSON.stringify({
-            newPost:newPost
+            newPost:{
+                createdBy:sessionStorage.getItem("userId"),
+                text:inputText,
+                mediaPhoto:imgSrcSharePhoto,
+                mediaVideo:videoSrcShareVideo,
+            }
         })
     }).then(res => {
         res.text().then(text=> {
