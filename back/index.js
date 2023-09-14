@@ -61,6 +61,15 @@ app.post("/addFollower",(req,res) =>{
     {"followers":follower}})
     .then();
 })
+app.post("/updateLike",(req,res) =>{
+    const createdBy = req.body.createdBy;
+    const likedBy = req.body.likedBy;
+    PostModel.updateOne(
+        {_id:createdBy},
+        {$addToSet:
+        {"likedBy" : likedBy}}).then()        
+})
+
 app.post("/updateUser",(req,res) =>{
     const loginUserId = req.body.loginUserId;
     const user = req.body.user;
@@ -115,7 +124,8 @@ const userSchema = new mongoose.Schema({
     profilePhoto: String,
     backgroundPhoto:String,
     companyOrSchool:String,
-    department:String,  
+    department:String,
+      
 });
 const UserModel = mongoose.model('User',userSchema);
 class User {
@@ -152,6 +162,7 @@ class Post {
         this.mediaVideo = mediaVideo
         this.createdDate = createdDate;
         this.likedBy = likedBy;
+        
     }   
 }
 const postSchema = new mongoose.Schema({
@@ -164,7 +175,7 @@ const postSchema = new mongoose.Schema({
 });
 const PostModel = mongoose.model('Post',postSchema);
 app.post('/addPost',(req,res) => {
-     const newPost = new Post(req.body.newPost.createdBy,req.body.newPost.text,req.body.newPost.mediaPhoto,req.body.newPost.mediaVideo, new Date().getTime(),req.body.newPost.likedBy);
+     const newPost = new Post(req.body.newPost.createdBy,req.body.newPost.text,req.body.newPost.mediaPhoto,req.body.newPost.mediaVideo, new Date().getTime(),req.body.newPost.likedBy,req.body.newPost.likeNumber);
      
      PostModel.create(newPost).then((data)=>{
        res.status(201).send("successfully shared");

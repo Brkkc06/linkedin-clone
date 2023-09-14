@@ -1,11 +1,12 @@
 class Post{
-    constructor(createdBy,text,mediaPhoto,mediaVideo,createdDate,likedBy){
+    constructor(createdBy,text,mediaPhoto,mediaVideo,createdDate,likedBy,likeNumber){
         this.createdBy = createdBy
         this.text  = text;
         this.mediamediaPhoto =mediaPhoto;
         this.mediaVideo = mediaVideo
         this.createdDate = createdDate;
-        this.likedBy =likedBy
+        this.likedBy =likedBy,
+        this.likeNumber = likeNumber;
     }
 }
 function openModal() {
@@ -79,6 +80,33 @@ function getByUserId(){
         })
     })
 }
+function likePost(event){
+    const likeButton = event.target; 
+    const likedBy = sessionStorage.getItem("userId");    
+    fetch(`http://127.0.0.1:3000/getUserById/${likedBy}`,{
+        method:"GET",
+        headers:{
+            "content-type" : "application/json"
+        },
+    }).then(res => {
+        res.json().then(async json =>{
+            const user = json.user;
+            const userFN = user.firstName;
+            const userLN = user.lastName;
+            Array.from(document.getElementsByClassName("proof-text"))[0].innerHTML = userFN.charAt(0).toUpperCase() + userFN.slice(1) + '\xa0' + userLN.charAt(0).toUpperCase() + userLN.slice(1) + '\xa0' +"beğendi";
+            fetch(`http://127.0.0.1:3000/updateLike`,{
+                method:"Post",
+                headers:{
+                    "content-type" :"application/json"
+                },
+                body:JSON.stringify({
+                    likedBy:likedBy,
+                    createdBy:accessKey
+                })
+            }).then()
+        })
+    })
+}
 // BACK-END E BURADAN GÖNDERECEKSİN.
 function sharePost(e){
     e.preventDefault() 
@@ -95,6 +123,7 @@ function sharePost(e){
                 text:inputText,
                 mediaPhoto:imgSrcSharePhoto,
                 mediaVideo:videoSrcShareVideo,
+                
             }
         })
     }).then(res => {

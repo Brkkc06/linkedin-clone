@@ -135,6 +135,7 @@ function getPosts() {
                     }
                     const accessKey = post.createdBy
                     Array.from(postDiv.getElementsByClassName("tfn "))[0].innerHTML = followedByUser;
+                    Array.from(postDiv.getElementsByClassName("btn-like"))[0].accessKey = accessKey
                     Array.from(postDiv.getElementsByClassName("btn-brk"))[0].accessKey = accessKey;
                     Array.from(postDiv.getElementsByClassName("mre "))[0].innerHTML = moment(new Date(post.createdDate)).fromNow();;
                     postsDiv.appendChild(postDiv);
@@ -163,9 +164,6 @@ function getProfilePhoto() {
             }
             if (loginUserId != null) {
                 Array.from(document.getElementsByClassName("logInLogOut"))[0].innerHTML = "Çıkış"
-            }
-            else if(loginUserId === null) {
-                Array.from(document.getElementsByClassName("logInLogOut"))[0].innerHTML = "Oturum Aç"
             }
         })
     })
