@@ -9,6 +9,7 @@ const app = express();
 const  fs = require('fs');
 const fileupload = require('express-fileupload');
 const { strict } = require('assert');
+const { error } = require('console');
 const port = 3000
 let db;
 mongoose.connect('mongodb://127.0.0.1:27017/userDB',{useNewUrlParser:true});
@@ -67,7 +68,11 @@ app.post("/updateLike",(req,res) =>{
     PostModel.updateOne(
         {_id:createdBy},
         {$addToSet:
-        {"likedBy" : likedBy}}).then()        
+        {"likedBy" : likedBy}}).then((res) => {
+            console.log(res)
+        }).catch((err) => {
+            console.log(err);
+        })        
 })
 
 app.post("/updateUser",(req,res) =>{

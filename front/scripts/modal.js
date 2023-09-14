@@ -81,7 +81,7 @@ function getByUserId(){
     })
 }
 function likePost(event){
-    const likeButton = event.target; 
+    const accessKey = event.target.accessKey; 
     const likedBy = sessionStorage.getItem("userId");    
     fetch(`http://127.0.0.1:3000/getUserById/${likedBy}`,{
         method:"GET",
