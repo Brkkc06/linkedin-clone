@@ -81,9 +81,10 @@ function getByUserId(){
     })
 }
 function likePost(event){
-    const accessKey = event.target.accessKey; 
-    const likedBy = sessionStorage.getItem("userId");    
-    fetch(`http://127.0.0.1:3000/getUserById/${likedBy}`,{
+    const accessKey = event.target.accessKey;
+    console.log("like yapıldı")
+    const userId = sessionStorage.getItem("userId");    
+    fetch(`http://127.0.0.1:3000/getUserById/${userId}`,{
         method:"GET",
         headers:{
             "content-type" : "application/json"
@@ -100,12 +101,29 @@ function likePost(event){
                     "content-type" :"application/json"
                 },
                 body:JSON.stringify({
-                    likedBy:likedBy,
-                    createdBy:accessKey
+                    likedBy:userId,
+                    postId:accessKey
                 })
             }).then()
         })
     })
+}
+
+function dislike(event){
+    const accessKey = event.target.accessKey;
+    console.log("dislike Yapıldı");
+    const userId = sessionStorage.getItem("userId");
+    fetch(`http://127.0.0.1:3000/disLike`,{
+        method:"Post",
+        headers:{
+            "content-type" : "application/json"
+        },
+        body:JSON.stringify({
+            postId:accessKey,
+            likedBy:userId,
+        })
+    }).then() 
+
 }
 // BACK-END E BURADAN GÖNDERECEKSİN.
 function sharePost(e){

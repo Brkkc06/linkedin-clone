@@ -63,10 +63,11 @@ app.post("/addFollower",(req,res) =>{
     .then();
 })
 app.post("/updateLike",(req,res) =>{
-    const createdBy = req.body.createdBy;
+    const postId = req.body.postId;
     const likedBy = req.body.likedBy;
+    console.log(req.body)
     PostModel.updateOne(
-        {_id:createdBy},
+        {_id:postId},
         {$addToSet:
         {"likedBy" : likedBy}}).then((res) => {
             console.log(res)
@@ -74,7 +75,19 @@ app.post("/updateLike",(req,res) =>{
             console.log(err);
         })        
 })
-
+app.post("/disLike",(req,res) => {
+    const postId =  req.body.postId;
+    const likedBy = req.body.likedBy;
+    console.log(req.body)
+    PostModel.updateOne(
+        {_id:postId},
+        {$pullAll:
+        {likedBy : [likedBy]}}).then((res) => {
+            console.log(res)
+        }).catch((err) => {
+            console.log(err);
+        })
+})
 app.post("/updateUser",(req,res) =>{
     const loginUserId = req.body.loginUserId;
     const user = req.body.user;
@@ -176,7 +189,7 @@ const postSchema = new mongoose.Schema({
     mediaPhoto: String,
     mediaVideo :String,
     createdDate:Number,
-    likedBy : String,
+    likedBy : Array,
 });
 const PostModel = mongoose.model('Post',postSchema);
 app.post('/addPost',(req,res) => {

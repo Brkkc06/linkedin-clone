@@ -85,13 +85,25 @@ function getPosts() {
                             "Content-type": "application/json"
                         },
                     });
+                    // Bunlar tamamlandı onclick e func. eklemen lazım f5 atmadan kaydetmesi için
+                    const postId = post._id;
+                    const likedBy = post.likedBy;
+                    const likeButton = postDiv.getElementsByClassName("likeButton")[0];
+                    if(likedBy.includes(userId)){
+                        likeButton.addEventListener("click",dislike);
+                    }
+                    else {
+                        likeButton.addEventListener("click",likePost);  
+                    }
+
+
+
                     const json = await result.json();
                     const userName = json.user.firstName.charAt(0).toUpperCase() + json.user.firstName.slice(1) + '\xa0' + json.user.lastName.charAt(0).toUpperCase() + json.user.lastName.slice(1);
                     const userProfilePhoto = json.user.profilePhoto;
                     const followedByUser = json.user.followers.length + '\xa0' + "Takipçi";
                     const postMediaPhoto = post.mediaPhoto;
                     const postMediaVideo = post.mediaVideo;
-                    // console.log(postMediaVideo)
                     const postText = post.text;
                     const postFollowedByUser = json.user.followed;
                     const postFollowersOfUser = json.user.followers;
@@ -105,22 +117,22 @@ function getPosts() {
                         for (const btnBrk of postDiv.getElementsByClassName("btn-brk"))
                             btnBrk.style.display = "none";
                     }
-                    if (post.likedBy) {
-                        const likedByResult = await fetch(`http://127.0.0.1:3000/getUserById/${post.likedBy}`, {
-                            method: "GET",
-                            headers: {
-                                "Content-type": "application/json"
-                            },
-                        });
-                        const jsonLikedBy = await likedByResult.json();
-                        const userPhoto = jsonLikedBy.user.profilePhoto
-                        const likedByPost = jsonLikedBy.user.firstName.charAt(0).toUpperCase() + jsonLikedBy.user.firstName.slice(1) + '\xa0' + jsonLikedBy.user.lastName.charAt(0).toUpperCase() + jsonLikedBy.user.lastName.slice(1);
-                        Array.from(postDiv.getElementsByClassName("evttuctvm"))[0].innerHTML = likedByPost;
-                        Array.from(postDiv.getElementsByClassName("ivm-view-attr"))[0].src = userPhoto;
-                    }
-                    else
-                        for (const likethisDiv of postDiv.getElementsByClassName("likethis"))
-                            likethisDiv.style.display = "none";    
+                    // if (post.likedBy) {
+                    //     const likedByResult = await fetch(`http://127.0.0.1:3000/getUserById/${post.likedBy}`, {
+                    //         method: "GET",
+                    //         headers: {
+                    //             "Content-type": "application/json"
+                    //         },
+                    //     });
+                    //     const jsonLikedBy = await likedByResult.json();
+                    //     const userPhoto = jsonLikedBy.user.profilePhoto
+                    //     const likedByPost = jsonLikedBy.user.firstName.charAt(0).toUpperCase() + jsonLikedBy.user.firstName.slice(1) + '\xa0' + jsonLikedBy.user.lastName.charAt(0).toUpperCase() + jsonLikedBy.user.lastName.slice(1);
+                    //     Array.from(postDiv.getElementsByClassName("evttuctvm"))[0].innerHTML = likedByPost;
+                    //     Array.from(postDiv.getElementsByClassName("ivm-view-attr"))[0].src = userPhoto;
+                    // }
+                    // else
+                    //     for (const likethisDiv of postDiv.getElementsByClassName("likethis"))
+                    //         likethisDiv.style.display = "none";    
                     if(postMediaVideo){
                         Array.from(postDiv.getElementsByClassName("videoTagStylesInFeedPage"))[0].src = await getFile(postMediaVideo);
                     }
@@ -134,8 +146,9 @@ function getPosts() {
                         Array.from(postDiv.getElementsByClassName("img-anka "))[0].src = await getFile(userProfilePhoto);
                     }
                     const accessKey = post.createdBy
+                    const accesKeyPost = post._id;
                     Array.from(postDiv.getElementsByClassName("tfn "))[0].innerHTML = followedByUser;
-                    Array.from(postDiv.getElementsByClassName("btn-like"))[0].accessKey = accessKey
+                    Array.from(postDiv.getElementsByClassName("likeButton"))[0].accessKey = accesKeyPost;
                     Array.from(postDiv.getElementsByClassName("btn-brk"))[0].accessKey = accessKey;
                     Array.from(postDiv.getElementsByClassName("mre "))[0].innerHTML = moment(new Date(post.createdDate)).fromNow();;
                     postsDiv.appendChild(postDiv);
