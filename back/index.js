@@ -65,7 +65,6 @@ app.post("/addFollower",(req,res) =>{
 app.post("/updateLike",(req,res) =>{
     const postId = req.body.postId;
     const likedBy = req.body.likedBy;
-    console.log(req.body)
     PostModel.updateOne(
         {_id:postId},
         {$addToSet:
@@ -78,7 +77,6 @@ app.post("/updateLike",(req,res) =>{
 app.post("/disLike",(req,res) => {
     const postId =  req.body.postId;
     const likedBy = req.body.likedBy;
-    console.log(req.body)
     PostModel.updateOne(
         {_id:postId},
         {$pullAll:
