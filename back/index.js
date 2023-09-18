@@ -8,8 +8,6 @@ const cors = require('cors');
 const app = express();
 const  fs = require('fs');
 const fileupload = require('express-fileupload');
-const { strict } = require('assert');
-const { error } = require('console');
 const port = 3000
 let db;
 mongoose.connect('mongodb://127.0.0.1:27017/userDB',{useNewUrlParser:true});
@@ -31,12 +29,12 @@ app.post('/addUser',(req,res) => {
     const newUser = new User(req.body.newUser);
    
     UserModel.create(newUser).then((data)=>{
-        res.status(201).send("successfully saved");
+        res.status(201).send("Başarıyla Kaydedildi");
     }).catch(err => {
         if (err.keyPattern.email === 1) {
-            res.status(400).send("already registered email: "  + err.keyValue.email);
+            res.status(400).send("HATA (Kayıtlı Email) "  + err.keyValue.email);
         } else {
-            res.status(500).send("error happened");
+            res.status(500).send("Bir hata oluştu");
         }
     })
 })
@@ -62,26 +60,28 @@ app.post("/addFollower",(req,res) =>{
     {"followers":follower}})
     .then();
 })
-app.post("/updateLike",(req,res) =>{
+app.post("/updateLike",(req,response) =>{
+    // console.log(req.body)
     const postId = req.body.postId;
     const likedBy = req.body.likedBy;
-    PostModel.updateOne(
+    return PostModel.updateOne(
         {_id:postId},
         {$addToSet:
-        {"likedBy" : likedBy}}).then((res) => {
-            console.log(res)
+        {"likedBy" : likedBy}}).then((result) => {
+            response.send(result);
         }).catch((err) => {
             console.log(err);
         })        
 })
-app.post("/disLike",(req,res) => {
+app.post("/disLike",(req,response) => {
+    // console.log(req.body)
     const postId =  req.body.postId;
     const likedBy = req.body.likedBy;
-    PostModel.updateOne(
+    return PostModel.updateOne(
         {_id:postId},
         {$pullAll:
-        {likedBy : [likedBy]}}).then((res) => {
-            console.log(res)
+        {likedBy : [likedBy]}}).then((result) => {
+            response.send(result);
         }).catch((err) => {
             console.log(err);
         })

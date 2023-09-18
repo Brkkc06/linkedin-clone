@@ -62,6 +62,30 @@ const urlLocationHandler = async () => {
     document.querySelector('meta[name="description"]').setAttribute("content", route.description);
 }
 urlLocationHandler();
+
+function dislikePostEvent(e, postDiv) {
+    dislike(e);
+    const likeButton = postDiv.getElementsByClassName("likeButton")[0];
+    const likeButtonText = postDiv.getElementsByClassName("liketext")[0];
+    const likeButtonIcon = postDiv.getElementsByClassName("likeButtonIcon")[0];
+    likeButton.style.backgroundColor = "white";
+    likeButtonText.style.color = "#616165";
+    likeButtonIcon.style.color = "#616165";
+    likeButton.onclick = (e) => likePostEvent(e, postDiv);
+}
+
+function likePostEvent(e, postDiv) {
+    likePost(e);
+    const likeButton = postDiv.getElementsByClassName("likeButton")[0];
+    const likeButtonText = postDiv.getElementsByClassName("liketext")[0];
+    const likeButtonIcon = postDiv.getElementsByClassName("likeButtonIcon")[0];
+    
+    likeButton.style.backgroundColor = "#0a66c2";
+    likeButtonText.style.color = "white";
+    likeButtonIcon.style.color = "white"
+    likeButton.onclick = (e) => dislikePostEvent(e, postDiv);
+}
+
 function getPosts() {
     const loginUserId = sessionStorage.getItem("userId");
     fetch("http://127.0.0.1:3000/getAll", {
@@ -89,11 +113,16 @@ function getPosts() {
                     const postId = post._id;
                     const likedBy = post.likedBy;
                     const likeButton = postDiv.getElementsByClassName("likeButton")[0];
+                    const likeButtonText = postDiv.getElementsByClassName("liketext")[0];
+                    const likeButtonIcon = postDiv.getElementsByClassName("likeButtonIcon")[0];
                     if(likedBy.includes(userId)){
-                        likeButton.addEventListener("click",dislike);
+                        likeButton.style.backgroundColor = "#0a66c2"
+                        likeButtonText.style.color = "white";
+                        likeButtonIcon.style.color = "white";
+                        likeButton.onclick = (e) => dislikePostEvent(e, postDiv);
                     }
                     else {
-                        likeButton.addEventListener("click",likePost);  
+                        likeButton.onclick = (e) => likePostEvent(e, postDiv);
                     }
 
 
@@ -148,6 +177,7 @@ function getPosts() {
                     const accessKey = post.createdBy
                     const accesKeyPost = post._id;
                     Array.from(postDiv.getElementsByClassName("tfn "))[0].innerHTML = followedByUser;
+                    Array.from(postDiv.getElementsByClassName("proof-text"))[0].innerHTML = likedBy.length + '\xa0' + "kişi beğendi"
                     Array.from(postDiv.getElementsByClassName("likeButton"))[0].accessKey = accesKeyPost;
                     Array.from(postDiv.getElementsByClassName("btn-brk"))[0].accessKey = accessKey;
                     Array.from(postDiv.getElementsByClassName("mre "))[0].innerHTML = moment(new Date(post.createdDate)).fromNow();;
