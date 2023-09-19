@@ -114,17 +114,14 @@ function getPosts() {
                     const likedBy = post.likedBy;
                     const likeButton = postDiv.getElementsByClassName("likeButton")[0];
                     const likeButtonText = postDiv.getElementsByClassName("liketext")[0];
-                    const likeButtonIcon = postDiv.getElementsByClassName("likeButtonIcon")[0];
-                    console.log(userId)
-                    if(likedBy.includes(userId)){
-                        console.log(1)
+                    const likeButtonIcon = postDiv.getElementsByClassName("likeButtonIcon")[0];                    
+                    if(likedBy.includes(userId)){    
                         likeButton.style.backgroundColor = "#0a66c2"
                         likeButtonText.style.color = "white";
                         likeButtonIcon.style.color = "white";
                         likeButton.onclick = (e) => dislikePostEvent(e, postDiv);
                     }
                     else {
-                        console.log(2)
                         likeButton.style.backgroundColor = "white";
                         likeButtonText.style.color = "#616165";
                         likeButtonIcon.style.color = "#616165";
