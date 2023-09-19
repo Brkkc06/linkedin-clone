@@ -1,4 +1,4 @@
-const urlPageTitle = "JS SPA  Routing";
+const urlPageTitle = "LinkedIn";
 const urlRoutes = {
     404: {
         template: "/public/404.html",
@@ -7,32 +7,32 @@ const urlRoutes = {
     },
     "/homepage": {
         template: "/public/feed.html",
-        title: "404 | " + urlPageTitle,
+        title:  urlPageTitle + "homepage",
         description: "This is the feedpage",
     },
     "/feed": {
         template: "/public/feed.html",
-        title: "404 | " + urlPageTitle,
+        title: urlPageTitle + '\xa0' +" | feed",
         description: "This is the feedpage",
     },
     "/login": {
         template: "/public/login.html",
-        title: "404 | " + urlPageTitle,
+        title: urlPageTitle + '\xa0' +" | login",
         description: "This is the loginpage",
     },
     "/register": {
         template: "/public/register.html",
-        title: "404 | " + urlPageTitle,
+        title: urlPageTitle + '\xa0' + " | register",
         description: "This is the registerpage",
     },
     "/login": {
         template: "/public/login.html",
-        title: "404 |" + urlPageTitle,
+        title: urlPageTitle + '\xa0' + " | login",
         description: "You are redirected to the login page"
     },
     "/editProfile":{
         template:"/public/editProfile.html",
-        title:"404 |" + urlPageTitle,
+        title: urlPageTitle + '\xa0' + " | edit Profile",
         description:"This is edit profile page"
     },
 }
@@ -43,7 +43,7 @@ const urlRoute = (event) => {
 }
 const urlLocationHandler = async () => {
     let location = window.location.pathname;
-    if (location === "/") {
+    if (location === "/" || location === "/homepage") {
         location = "/feed";
     }
     const route = urlRoutes[location] || urlRoutes[404];
@@ -87,7 +87,7 @@ function likePostEvent(e, postDiv) {
 }
 
 function getPosts() {
-    const loginUserId = sessionStorage.getItem("userId");
+    const loginUserId = localStorage.getItem("userId");
     fetch("http://127.0.0.1:3000/getAll", {
         method: "GET",
         headers: {
@@ -115,13 +115,19 @@ function getPosts() {
                     const likeButton = postDiv.getElementsByClassName("likeButton")[0];
                     const likeButtonText = postDiv.getElementsByClassName("liketext")[0];
                     const likeButtonIcon = postDiv.getElementsByClassName("likeButtonIcon")[0];
+                    console.log(userId)
                     if(likedBy.includes(userId)){
+                        console.log(1)
                         likeButton.style.backgroundColor = "#0a66c2"
                         likeButtonText.style.color = "white";
                         likeButtonIcon.style.color = "white";
                         likeButton.onclick = (e) => dislikePostEvent(e, postDiv);
                     }
                     else {
+                        console.log(2)
+                        likeButton.style.backgroundColor = "white";
+                        likeButtonText.style.color = "#616165";
+                        likeButtonIcon.style.color = "#616165";
                         likeButton.onclick = (e) => likePostEvent(e, postDiv);
                     }
 
@@ -189,7 +195,7 @@ function getPosts() {
     })
 }
 function getProfilePhoto() {
-    const loginUserId = sessionStorage.getItem("userId");
+    const loginUserId = localStorage.getItem("userId");
     fetch(`http://127.0.0.1:3000/getUserById/${loginUserId}`, {
         method: "GET",
         headers: {
@@ -212,7 +218,7 @@ function getProfilePhoto() {
     })
 }
 function getUserName() {
-    const loginUserId = sessionStorage.getItem("userId");
+    const loginUserId = localStorage.getItem("userId");
     fetch(`http://127.0.0.1:3000/getUserById/${loginUserId}`, {
         method: "GET",
         headers: {
@@ -247,7 +253,7 @@ function getUserName() {
 }
 function getButtonBrk(e) {
     const accessKey = event.target.accessKey;
-    const loginUserId = sessionStorage.getItem("userId");
+    const loginUserId = localStorage.getItem("userId");
     fetch("http://127.0.0.1:3000/addFollower", {
         method: "POST",
         headers: {

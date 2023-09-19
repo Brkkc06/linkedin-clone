@@ -267,3 +267,6 @@ input[type="file"]{
     padding-top: 0.2rem;
     height:3rem;
 }
+.logInLogOut{
+    pointer-events: none;
+}

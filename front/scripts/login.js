@@ -24,11 +24,13 @@ function login(e) {
     }).then(response => {
         response.json().then(async json=> {
             alert(json.message)
-            sessionStorage.setItem("userId", json.id)
+            localStorage.setItem("userId", json.id)
             window.history.pushState({},"", "/feed");
             const html = await fetch("/public/feed.html").then((response) => response.text());
             document.getElementById("content").innerHTML = html;
             getPosts();
+            getProfilePhoto()
+            getUserName()
         })
     })
 }

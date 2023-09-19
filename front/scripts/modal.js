@@ -32,7 +32,7 @@ function openModal() {
 function closeModal() {
     document.querySelector('.jw-modal.open').classList.remove('open');
 }
-const userId=sessionStorage.getItem("userId");
+const userId=localStorage.getItem("userId");
 function getByUserId(){
     const res =  fetch(`http://127.0.0.1:3000/getUserById/${userId}`,{
         method:"GET",
@@ -83,7 +83,7 @@ function getByUserId(){
 function likePost(event){
     const accessKey = event.target.accessKey;
     console.log("like yapıldı")
-    const userId = sessionStorage.getItem("userId");    
+    const userId = localStorage.getItem("userId");    
     fetch(`http://127.0.0.1:3000/getUserById/${userId}`,{
         method:"GET",
         headers:{
@@ -112,7 +112,7 @@ function likePost(event){
 function dislike(event){
     const accessKey = event.target.accessKey;
     console.log("dislike Yapıldı");
-    const userId = sessionStorage.getItem("userId");
+    const userId = localStorage.getItem("userId");
     fetch(`http://127.0.0.1:3000/disLike`,{
         method:"Post",
         headers:{
@@ -137,7 +137,7 @@ function sharePost(e){
         },
         body:JSON.stringify({
             newPost:{
-                createdBy:sessionStorage.getItem("userId"),
+                createdBy:localStorage.getItem("userId"),
                 text:inputText,
                 mediaPhoto:imgSrcSharePhoto,
                 mediaVideo:videoSrcShareVideo,

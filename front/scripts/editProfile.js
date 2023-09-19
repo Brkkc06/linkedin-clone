@@ -84,7 +84,7 @@ async function getFile(imgsrc){
 }
 let skills = [];
 function getProfileInfo() {
-    const loginUserId = sessionStorage.getItem("userId");
+    const loginUserId = localStorage.getItem("userId");
     fetch(`http://127.0.0.1:3000/getUserById/${loginUserId}`, {
         method: "GET",
         headers: {
@@ -168,7 +168,7 @@ function onChangeInput() {
     document.getElementsByClassName('changeSaveBtn')[0].disabled = false;
 }
 function updateUser(e) {
-    const loginUserId = sessionStorage.getItem("userId");
+    const loginUserId = localStorage.getItem("userId");
     e.preventDefault();
     const updateFirstName = document.getElementsByClassName("editFirstName")[0].value;
     const updateLastName = document.getElementsByClassName("editLastName")[0].value;
