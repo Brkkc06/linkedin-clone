@@ -47,6 +47,50 @@ function BackgroundHandleSubmit(event) {
     event.preventDefault();
     logFileBackground(event);
 }
+function calendarOnclick(e){
+    calenderButton = event.target;
+    document.getElementsByClassName("calendarDiv")[0].style.display = "flex";
+}
+function calendarChange(){
+    calendarInput = document.getElementById("calendarInput").value;
+    calenderClock = document.getElementById("calendarClock").value;
+    calendarInputControl = document.getElementById("calendarInput").value;
+    calenderClockControl = document.getElementById("calendarClock").value;
+    if(calendarInputControl === ""){
+        calendarInputControl = false;
+    }
+    else{
+        calendarInputControl = true;
+    }
+    if(calenderClockControl === ""){
+        calenderClockControl = false;
+    }
+    else{
+        calenderClockControl = true;
+    }
+    if(calendarInputControl === true && calenderClockControl === true){
+        document.getElementById("ShareButton").disabled= false;
+    }
+    const months = ["Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık",]
+    const date = new Date(calendarInput);
+    const msDate = date.getTime();
+}
+function calendarPushBackend(){
+    calendarChange()
+    fetch(`http://127.0.0.1:3000/addPost`,{
+        method:"Post",
+        headers:{
+            "content-type" :"application/json"
+        },
+        body:JSON.stringify({
+            newsPost:{
+                createdBy:localStorage.getItem("userId"),
+                text:asadv,
+
+            }
+        })
+    })
+}
 function fileUploadDone() {
     logFileSharePhoto();
     document.getElementById("ShareButton").disabled= false;

@@ -218,3 +218,39 @@
     display: flex;
     justify-content: center;
 }
+.calendarDiv{
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+.calendarInputLabel {
+    font-size: 2.5rem;
+    align-items: center;
+    margin-right: 1rem;
+}
+.calenderClockLabel {
+    font-size: 2.5rem;
+    align-items: center;
+    margin-right: 1rem;
+}
+.calendarDiv input {
+    font-size: 2.5rem;
+    padding-left: 5rem;
+    background-color: var(--linkedinlacivert);
+    color: #eee;
+    border: none;
+    border-radius: 5px;
+}
+.calendarText{
+    pointer-events: none;
+}
+.calendarIcon{
+    pointer-events: none;
+}
+.dateDiv{
+    display: grid;
+}
+.clockDiv{
+    display: grid;
+    margin-left: 1rem;
+}

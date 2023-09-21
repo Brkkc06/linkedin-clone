@@ -168,6 +168,16 @@
                                     <img src="" class="imageInPostModal">
                                     <video controls id="videoTag" class="videoTagStyles"  ></video>
                                 </div>
+                                <div class="calendarDiv">
+                                    <div class="dateDiv">
+                                    <label for="calendarInput" class="calendarInputLabel">Tarih:</label>
+                                    <input type="date" name="calendarInput" id="calendarInput" onchange="calendarChange()">
+                                    </div>
+                                    <div class="clockDiv">
+                                    <label for="calendarClock" class="calenderClockLabel">Saat :</label>
+                                    <input type="time" name="calendarClock" id="calendarClock" onchange="calendarChange()">
+                                    </div>
+                                </div>
                                 <div>
                                     <div class="smileFaceEmoji" style="padding-left: 5px;">
                                         <a href="#">
@@ -224,7 +234,7 @@
                         Video                   
                     </label>
                    
-                    <button type="button" class="btn btn-toolbar calendar" id="calendar" onclick="opanModal();">
+                    <button type="button" class="btn btn-toolbar calendarButton"  onclick="openModal();calendarOnclick(event);">
                         <i class="fa-solid fa-calendar-days calendarIcon" style="color: #c37d16;"></i>
                         <span class="fotograf calendarText">Etkinlik</span>
                     </button>
