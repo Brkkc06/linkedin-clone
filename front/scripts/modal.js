@@ -127,6 +127,7 @@ function dislike(event){
 }
 // BACK-END E BURADAN GÖNDERECEKSİN.
 function sharePost(e){
+    calendarChange()
     e.preventDefault() 
     postForm = document.getElementById('postForm');
     inputText = postForm.elements.modalInput.value;
@@ -140,8 +141,7 @@ function sharePost(e){
                 createdBy:localStorage.getItem("userId"),
                 text:inputText,
                 mediaPhoto:imgSrcSharePhoto,
-                mediaVideo:videoSrcShareVideo,
-                
+                mediaVideo:videoSrcShareVideo,       
             }
         })
     }).then(res => {
