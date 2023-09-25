@@ -125,29 +125,20 @@ function dislike(event){
     }).then() 
 
 }
-// BACK-END E BURADAN GÖNDERECEKSİN.
+
 function sharePost(e){
     calendarChange()
     e.preventDefault() 
     postForm = document.getElementById('postForm');
     inputText = postForm.elements.modalInput.value;
-    fetch("http://127.0.0.1:3000/addPost",{
-        method:"POST",
-        headers: {
-            "Content-type" : "application/json"
-        },
-        body:JSON.stringify({
-            newPost:{
-                createdBy:localStorage.getItem("userId"),
-                text:inputText,
-                mediaPhoto:imgSrcSharePhoto,
-                mediaVideo:videoSrcShareVideo,       
-            }
-        })
-    }).then(res => {
-        res.text().then(text=> {
-            alert(text)
-            closeModal();
-        })
-    })
+    addPost({
+        createdBy:localStorage.getItem("userId"),
+        text:inputText,
+        mediaPhoto:imgSrcSharePhoto,
+        mediaVideo:videoSrcShareVideo,
+        activity:activity       
+    }).then(res => res.text().then(text=> {
+        alert(text)
+        closeModal();
+    }))
 }

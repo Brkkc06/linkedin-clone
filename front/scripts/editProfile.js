@@ -1,5 +1,6 @@
 const img = document.getElementsByClassName("editPhoto");
 let imgSrc, imgSrcBckground, imgSrcSharePhoto, videoSrcShareVideo;
+let activity;
 async function saveUserImg(imgtype) {
     const fileExtension = document.getElementById(imgtype).files[0].name.split(".")
     const extension = fileExtension.slice(-1);
@@ -52,8 +53,11 @@ function calendarOnclick(e) {
     document.getElementsByClassName("calendarDiv")[0].style.display = "flex";
 }
 function calendarChange() {
+    const ShareButton = document.getElementById("ShareButton")
     calendarInput = document.getElementById("calendarInput").value;
     calenderClock = document.getElementById("calendarClock").value;
+  
+    
     calendarInputControl = document.getElementById("calendarInput").value;
     calenderClockControl = document.getElementById("calendarClock").value;
     if (calendarInputControl === "") {
@@ -73,7 +77,7 @@ function calendarChange() {
     }
     const date = new Date(calendarInput);
     const msDate = date.getTime();
-    const activity = msDate + calenderClock;
+    activity = msDate + " |--|" + calenderClock;
 }
 function fileUploadDone() {
     logFileSharePhoto();

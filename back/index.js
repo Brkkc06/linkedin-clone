@@ -178,7 +178,7 @@ class Post {
         this.mediaVideo = mediaVideo
         this.createdDate = createdDate;
         this.likedBy = likedBy;
-        this.activity = activity;
+        this.activity = activity
     }   
 }
 const postSchema = new mongoose.Schema({
@@ -188,7 +188,7 @@ const postSchema = new mongoose.Schema({
     mediaVideo :String,
     createdDate:Number,
     likedBy : Array,
-    activity : Number
+    activity:String
 });
 const PostModel = mongoose.model('Post',postSchema);
 app.post('/addPost',(req,res) => {
