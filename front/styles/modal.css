@@ -152,6 +152,31 @@
     cursor: pointer;
     padding: 0;
 }
+.modalShareIcon .btnModal{
+    border: none;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 2rem;
+    width: 5.6rem;
+    height: 5.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: var(--bodybgc);
+    font-size: 2rem;
+    transition: ease 0.15s;
+    cursor: pointer;
+}
+.modalShareIcon .btnModal:hover{
+    box-shadow: 0 4px 2px 3px var(--hoverkremi);
+}
+.modalShareIcon .btnModal i{
+    pointer-events: none;
+}
+.modalShareIcon li:hover{
+    box-shadow: 0 4px 2px 3px var(--hoverkremi);
+}
 .modalShareIcon label:hover{
     box-shadow: 0 4px 2px 3px var(--hoverkremi);
 }
@@ -160,6 +185,7 @@
 }
 .modalShareIcon li a i {
     color: var(--grey);
+    pointer-events: none;
 }
 .clockButton i {
     font-size: 2rem;
@@ -254,3 +280,9 @@
     display: grid;
     margin-left: 1rem;
 }
+.activityDate{
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--linkedinlacivert);
+    text-decoration: underline;
+}   

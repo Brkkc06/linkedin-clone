@@ -131,11 +131,24 @@ function getPosts() {
                     const followedByUser = json.user.followers.length + '\xa0' + "Takipçi";
                     const postMediaPhoto = post.mediaPhoto;
                     const postMediaVideo = post.mediaVideo;
+                    const activity = post.activity
+                    // console.log(postDiv.getElementsByClassName("activityDate")[0])
                     const postText = post.text;
                     const postFollowedByUser = json.user.followed;
                     const postFollowersOfUser = json.user.followers;
                     Array.from(postDiv.getElementsByClassName("zgl"))[0].innerHTML = userName;
                     Array.from(postDiv.getElementsByClassName("golf"))[0].innerHTML = postText;
+                    const spliteToActivity = activity.split("|");
+                    const activityToDate = spliteToActivity[0];
+                    const activityClock = spliteToActivity[2];
+                    const activityToNumber = Number(activityToDate);
+                    const activityDate = new Date(activityToNumber)
+                    const activiyMonth = activityDate.getMonth();
+                    const activityYear = activityDate.getFullYear();
+                    const activityDay = activityDate.getDate();
+                    const ActivityString = activityDay + "/" + activiyMonth + "/" + activityYear + '\xa0' + "   Saat : " + activityClock + "'de";
+                    if(activity) Array.from(postDiv.getElementsByClassName("activityDate"))[0].innerHTML = ActivityString;
+                    
                     if (postFollowersOfUser.includes(loginUserId)) {
                         for (const btnBrk of postDiv.getElementsByClassName("btn-brk"))
                             btnBrk.style.display = "none";
@@ -175,6 +188,7 @@ function getPosts() {
                     const accessKey = post.createdBy
                     const accesKeyPost = post._id;
                     Array.from(postDiv.getElementsByClassName("tfn "))[0].innerHTML = followedByUser;
+                    
                     Array.from(postDiv.getElementsByClassName("proof-text"))[0].innerHTML = likedBy.length + '\xa0' + "kişi beğendi"
                     Array.from(postDiv.getElementsByClassName("likeButton"))[0].accessKey = accesKeyPost;
                     Array.from(postDiv.getElementsByClassName("btn-brk"))[0].accessKey = accessKey;
