@@ -1,6 +1,7 @@
 const img = document.getElementsByClassName("editPhoto");
 let imgSrc, imgSrcBckground, imgSrcSharePhoto, videoSrcShareVideo;
 let activity;
+const imgBackground = document.getElementsByClassName("editBackground");
 async function saveUserImg(imgtype) {
     const fileExtension = document.getElementById(imgtype).files[0].name.split(".")
     const extension = fileExtension.slice(-1);
@@ -35,7 +36,7 @@ function HandleSubmit(event) {
     event.preventDefault();
     logFile(event);
 }
-const imgBackground = document.getElementsByClassName("editBackground");
+
 function logFileBackground(event) {
     var readerBackground = new FileReader();
     readerBackground.onload = function (event) {
@@ -108,7 +109,6 @@ function videoUploadDone() {
     document.getElementById("videoTag").style.display = "block"
 
 }
-//
 async function getFile(imgsrc) {
     const url = encodeURIComponent(imgsrc)
     const result = await fetch(`http://127.0.0.1:3000/getFile?src=${url}`)
@@ -116,14 +116,9 @@ async function getFile(imgsrc) {
 }
 let skills = [];
 function getProfileInfo() {
-    const loginUserId = localStorage.getItem("userId");
-    fetch(`http://127.0.0.1:3000/getUserById/${loginUserId}`, {
-        method: "GET",
-        headers: {
-            "Content-type": "application/json"
-        },
-    }).then((res) => {
+    getUserByIdServices(loginUserId).then((res) => {
         res.json().then(async json => {
+            console.log("Giriyor")
             const getProfilePhoto = json.user.profilePhoto;
             const getFirstName = json.user.firstName;
             const getLastName = json.user.lastName;
@@ -200,7 +195,6 @@ function onChangeInput() {
     document.getElementsByClassName('changeSaveBtn')[0].disabled = false;
 }
 function updateUser(e) {
-    const loginUserId = localStorage.getItem("userId");
     e.preventDefault();
     const updateFirstName = document.getElementsByClassName("editFirstName")[0].value;
     const updateLastName = document.getElementsByClassName("editLastName")[0].value;
@@ -209,26 +203,18 @@ function updateUser(e) {
     const updateSkill = skills;
     const updateCompanyOrSchool = document.getElementsByClassName("userInfo")[0].value;
     const updateDepartment = document.getElementsByClassName("userDepartment")[0].value;
-    fetch("http://127.0.0.1:3000/updateUser", {
-        method: "Post",
-        headers: {
-            "Content-type": "application/json"
-        },
-        body: JSON.stringify({
-            loginUserId: loginUserId,
-            user: {
-                firstName: updateFirstName,
-                lastName: updateLastName,
-                email: updateEmail,
-                password: updatePass,
-                skills: updateSkill,
-                backgroundPhoto: imgSrcBckground,
-                profilePhoto: imgSrc,
-                companyOrSchool: updateCompanyOrSchool,
-                department: updateDepartment
-            }
-        })
-    }).then(res => {
-        res.json().then(async json => alert(json.message))
+    updateUserServices({ 
+        firstName: updateFirstName,
+        lastName: updateLastName,
+        email: updateEmail,
+        password: updatePass,
+        skills: updateSkill,
+        backgroundPhoto: imgSrcBckground,
+        profilePhoto: imgSrc,
+        companyOrSchool: updateCompanyOrSchool,
+        department: updateDepartment})
+        .then(res => {
+        res.json()
+        .then(async json => alert(json.message))
     })
 }

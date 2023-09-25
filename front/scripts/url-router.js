@@ -88,12 +88,8 @@ function likePostEvent(e, postDiv) {
 
 function getPosts() {
     const loginUserId = localStorage.getItem("userId");
-    fetch("http://127.0.0.1:3000/getAll", {
-        method: "GET",
-        headers: {
-            "Content-type": "application/json"
-        },
-    }).then(res => {
+ getAllPostServices()
+ .then(res => {
         res.json().then(async json => {
             const posts = json.posts;
             const postsDiv = document.getElementById("posts");
@@ -109,7 +105,6 @@ function getPosts() {
                             "Content-type": "application/json"
                         },
                     });
-                    // Bunlar tamamlandı onclick e func. eklemen lazım f5 atmadan kaydetmesi için
                     const postId = post._id;
                     const likedBy = post.likedBy;
                     const likeButton = postDiv.getElementsByClassName("likeButton")[0];
@@ -193,12 +188,7 @@ function getPosts() {
 }
 function getProfilePhoto() {
     const loginUserId = localStorage.getItem("userId");
-    fetch(`http://127.0.0.1:3000/getUserById/${loginUserId}`, {
-        method: "GET",
-        headers: {
-            "Content-type": "application/json"
-        },
-    }).then((res) => {
+    getUserByIdServices(loginUserId).then((res) => {
         res.json().then(async json => {
             const userProfilePhoto = json.user.profilePhoto;
             Array.from(document.getElementsByClassName("followersStrong"))[0].innerHTML = json.user.followers.length;
@@ -216,12 +206,7 @@ function getProfilePhoto() {
 }
 function getUserName() {
     const loginUserId = localStorage.getItem("userId");
-    fetch(`http://127.0.0.1:3000/getUserById/${loginUserId}`, {
-        method: "GET",
-        headers: {
-            "Content-type": "application/json"
-        },
-    }).then((res) => {
+ getUserByIdServices(loginUserId).then((res) => {
         res.json().then(async json => {
             const userName = json.user.firstName.charAt(0).toUpperCase() + json.user.firstName.slice(1) + '\xa0' + json.user.lastName.charAt(0).toUpperCase() + json.user.lastName.slice(1);
             const userBckgroundPhoto = json.user.backgroundPhoto;
@@ -251,16 +236,9 @@ function getUserName() {
 function getButtonBrk(e) {
     const accessKey = event.target.accessKey;
     const loginUserId = localStorage.getItem("userId");
-    fetch("http://127.0.0.1:3000/addFollower", {
-        method: "POST",
-        headers: {
-            "content-type": "application/json"
-        },
-        body: JSON.stringify({
-            follower: loginUserId,
-            followed: accessKey,
-        })
-    }).then((res) => res.text()).then(async (res) => {
+    addFollowerServices(loginUserId,accessKey).
+    then((res) => res.text()).
+    then(async (res) => {
         alert(res);
     })
 }

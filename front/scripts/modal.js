@@ -1,12 +1,12 @@
+const userId = localStorage.getItem("userId"); 
 class Post{
-    constructor(createdBy,text,mediaPhoto,mediaVideo,createdDate,likedBy,likeNumber){
+    constructor(createdBy,text,mediaPhoto,mediaVideo,createdDate,likedBy){
         this.createdBy = createdBy
         this.text  = text;
         this.mediamediaPhoto =mediaPhoto;
         this.mediaVideo = mediaVideo
         this.createdDate = createdDate;
-        this.likedBy =likedBy,
-        this.likeNumber = likeNumber;
+        this.likedBy =likedBy
     }
 }
 function openModal() {
@@ -32,14 +32,8 @@ function openModal() {
 function closeModal() {
     document.querySelector('.jw-modal.open').classList.remove('open');
 }
-const userId=localStorage.getItem("userId");
 function getByUserId(){
-    const res =  fetch(`http://127.0.0.1:3000/getUserById/${userId}`,{
-        method:"GET",
-        headers:{
-            "content-type":"application/json"
-        },
-    }).then(res =>{
+    getUserByIdServices(userId).then(res =>{
         res.json().then (async json => {
             const result = json.user;
             const userName = result.firstName;
@@ -48,12 +42,8 @@ function getByUserId(){
             const userFollowers = result.followers;
             const userFollowed = result.followed;
             if(userFollowers){
-                fetch (`http://127.0.0.1:3000/getUserById/${userFollowers}`,{
-                    method:"GET",
-                    headers:{
-                        "content-type":"application/json"
-                    },
-                }).then(response =>{
+                getUserByIdServices(userFollowers)
+                .then(response =>{
                     response.json().then(async json =>{
                         const resultUserFollowers = json.user;
                         const userFollowersName= resultUserFollowers.firstName;
@@ -63,12 +53,8 @@ function getByUserId(){
                 })
             }
             if(userFollowed){
-                fetch (`http://127.0.0.1:3000/getUserById/${userFollowed}`,{
-                    method:"GET",
-                    headers:{
-                        "content-type":"application/json"
-                    },
-                }).then(responseUserFollowed =>{
+                getUserByIdServices(userFollowed)
+                .then(responseUserFollowed =>{
                     responseUserFollowed.json().then(async json =>{
                         const resultUserFollowed = json.user;
                         const userFollowedName= resultUserFollowed.firstName;
@@ -83,47 +69,23 @@ function getByUserId(){
 function likePost(event){
     const accessKey = event.target.accessKey;
     console.log("like yapıldı")
-    const userId = localStorage.getItem("userId");    
-    fetch(`http://127.0.0.1:3000/getUserById/${userId}`,{
-        method:"GET",
-        headers:{
-            "content-type" : "application/json"
-        },
-    }).then(res => {
+       
+    getUserByIdServices(userId)
+    .then(res => {
         res.json().then(async json =>{
             const user = json.user;
             const userFN = user.firstName;
             const userLN = user.lastName;
             Array.from(document.getElementsByClassName("proof-text"))[0].innerHTML = userFN.charAt(0).toUpperCase() + userFN.slice(1) + '\xa0' + userLN.charAt(0).toUpperCase() + userLN.slice(1) + '\xa0' +"beğendi";
-            fetch(`http://127.0.0.1:3000/updateLike`,{
-                method:"Post",
-                headers:{
-                    "content-type" :"application/json"
-                },
-                body:JSON.stringify({
-                    likedBy:userId,
-                    postId:accessKey
-                })
-            }).then()
+            updateLikeServices(userId,accessKey)
+            .then()
         })
     })
 }
 
 function dislike(event){
     const accessKey = event.target.accessKey;
-    console.log("dislike Yapıldı");
-    const userId = localStorage.getItem("userId");
-    fetch(`http://127.0.0.1:3000/disLike`,{
-        method:"Post",
-        headers:{
-            "content-type" : "application/json"
-        },
-        body:JSON.stringify({
-            postId:accessKey,
-            likedBy:userId,
-        })
-    }).then() 
-
+    dislikeServices(accessKey,userId).then() 
 }
 
 function sharePost(e){
