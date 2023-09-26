@@ -1,47 +1,45 @@
 const urlPageTitle = "LinkedIn";
 const urlRoutes = {
     404: {
-        template: "/public/404.html",
+        template: "./public/404.html",
         title: "404 | " + urlPageTitle,
         description: "Page not found",
     },
     "/homepage": {
-        template: "/public/feed.html",
+        template: "./public/feed.html",
         title:  urlPageTitle + "homepage",
         description: "This is the feedpage",
     },
     "/feed": {
-        template: "/public/feed.html",
+        template: "./public/feed.html",
         title: urlPageTitle + '\xa0' +" | feed",
         description: "This is the feedpage",
     },
-    "/login": {
-        template: "/public/login.html",
-        title: urlPageTitle + '\xa0' +" | login",
-        description: "This is the loginpage",
-    },
     "/register": {
-        template: "/public/register.html",
+        template: "./public/register.html",
         title: urlPageTitle + '\xa0' + " | register",
         description: "This is the registerpage",
     },
     "/login": {
-        template: "/public/login.html",
+        template: "./public/login.html",
         title: urlPageTitle + '\xa0' + " | login",
         description: "You are redirected to the login page"
     },
     "/editProfile":{
-        template:"/public/editProfile.html",
+        template:"./public/editProfile.html",
         title: urlPageTitle + '\xa0' + " | edit Profile",
         description:"This is edit profile page"
     },
 }
 const urlRoute = (event) => {
+    event = event || window.event
+    console.log(event.target.href)
     event.preventDefault();
     window.history.pushState({}, "", event.target.href);
     urlLocationHandler();
 }
 const urlLocationHandler = async () => {
+    console.log('urlLocationHandler')
     let location = window.location.pathname;
     if (location === "/" || location === "/homepage") {
         location = "/feed";
@@ -49,18 +47,20 @@ const urlLocationHandler = async () => {
     const route = urlRoutes[location] || urlRoutes[404];
     const html = await fetch(route.template).then((response) => response.text());
     document.getElementById("content").innerHTML = html;
-    if (route.template === "/public/feed.html") {
+    if (route.template === "./public/feed.html") {
         getPosts()
         getProfilePhoto()
         getUserName()
     }
-    if(route.template === "/public/editProfile.html"){
+    if(route.template === "./public/editProfile.html"){
         getProfileInfo();
         startEditProfile();
     }
     document.title = route.title;
     document.querySelector('meta[name="description"]').setAttribute("content", route.description);
 }
+window.onpopstate = urlLocationHandler;
+window.route = urlRoute;
 urlLocationHandler();
 
 function dislikePostEvent(e, postDiv) {
@@ -96,7 +96,7 @@ function getPosts() {
             for (let index = posts.length; index > 0; index--) {
                 const post = posts[index - 1];
                 const postDiv = document.createElement('div');
-                const postHtml = await fetch("/public/post.html").then((response) => response.text());
+                const postHtml = await fetch("./public/post.html").then((response) => response.text());
                 postDiv.innerHTML = postHtml;
                 if (post.createdBy) {
                     const result = await fetch(`http://127.0.0.1:3000/getUserById/${post.createdBy}`, {
@@ -132,23 +132,25 @@ function getPosts() {
                     const postMediaPhoto = post.mediaPhoto;
                     const postMediaVideo = post.mediaVideo;
                     const activity = post.activity
-                    // console.log(postDiv.getElementsByClassName("activityDate")[0])
+                    const activityClock = post.activityClock;
+                    const activityDate = new Date(activity);
+                    const activityMonth  = activityDate.getMonth();
+                    const activityYear = activityDate.getFullYear();
+                    const activityDay = activityDate.getDate();
+                    const activityFullDate = activityDay + "/" + activityMonth + "/" + activityYear + '\xa0' + " Saat : " + activityClock + "'de";
                     const postText = post.text;
                     const postFollowedByUser = json.user.followed;
                     const postFollowersOfUser = json.user.followers;
                     Array.from(postDiv.getElementsByClassName("zgl"))[0].innerHTML = userName;
                     Array.from(postDiv.getElementsByClassName("golf"))[0].innerHTML = postText;
-                    const spliteToActivity = activity.split("|");
-                    const activityToDate = spliteToActivity[0];
-                    const activityClock = spliteToActivity[2];
-                    const activityToNumber = Number(activityToDate);
-                    const activityDate = new Date(activityToNumber)
-                    const activiyMonth = activityDate.getMonth();
-                    const activityYear = activityDate.getFullYear();
-                    const activityDay = activityDate.getDate();
-                    const ActivityString = activityDay + "/" + activiyMonth + "/" + activityYear + '\xa0' + "   Saat : " + activityClock + "'de";
-                    if(activity) Array.from(postDiv.getElementsByClassName("activityDate"))[0].innerHTML = ActivityString;
-                    
+                    // const ActivityString = activityDay + "/" + activiyMonth + "/" + activityYear + '\xa0' + "   Saat : " + activityClock + "'de";
+                    if(activity ) {
+                    Array.from(postDiv.getElementsByClassName("activityDate"))[0].innerHTML = activityFullDate;
+                    }
+
+
+
+
                     if (postFollowersOfUser.includes(loginUserId)) {
                         for (const btnBrk of postDiv.getElementsByClassName("btn-brk"))
                             btnBrk.style.display = "none";
@@ -248,11 +250,11 @@ function getUserName() {
     })
 }
 function getButtonBrk(e) {
-    const accessKey = event.target.accessKey;
     const loginUserId = localStorage.getItem("userId");
-    addFollowerServices(loginUserId,accessKey).
-    then((res) => res.text()).
-    then(async (res) => {
+    const accessKey = e.target.accessKey;
+    addFollowerServices(loginUserId,accessKey)
+    .then((res) => res.text())
+    .then(async (res) => {
         alert(res);
     })
 }

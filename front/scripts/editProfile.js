@@ -1,6 +1,7 @@
 const img = document.getElementsByClassName("editPhoto");
 let imgSrc, imgSrcBckground, imgSrcSharePhoto, videoSrcShareVideo;
 let activity;
+let activityClock;
 const imgBackground = document.getElementsByClassName("editBackground");
 async function saveUserImg(imgtype) {
     const fileExtension = document.getElementById(imgtype).files[0].name.split(".")
@@ -78,7 +79,8 @@ function calendarChange() {
     }
     const date = new Date(calendarInput);
     const msDate = date.getTime();
-    activity = msDate + " |--|" + calenderClock;
+    activity = msDate;
+    activityClock = calenderClock;
 }
 function fileUploadDone() {
     logFileSharePhoto();

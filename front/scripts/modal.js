@@ -98,7 +98,8 @@ function sharePost(e){
         text:inputText,
         mediaPhoto:imgSrcSharePhoto,
         mediaVideo:videoSrcShareVideo,
-        activity:activity       
+        activity:activity,
+        activityClock:activityClock,       
     }).then(res => res.text().then(text=> {
         alert(text)
         closeModal();
