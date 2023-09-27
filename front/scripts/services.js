@@ -73,6 +73,16 @@ async function getAllPostServices(){
     return result;
 }
 
+async function getAllUserServices(){
+    const result = await fetch("http://127.0.0.1:3000/getAllUser", {
+        method: "GET",
+        headers: {
+            "Content-type": "application/json"
+        },
+    })
+    return result;
+}
+
 async function addFollowerServices(loginUserId,accessKey){
     const result = await fetch("http://127.0.0.1:3000/addFollower", {
         method: "POST",

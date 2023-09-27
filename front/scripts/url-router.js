@@ -33,19 +33,17 @@ const urlRoutes = {
 }
 const urlRoute = (event) => {
     event = event || window.event
-    console.log(event.target.href)
     event.preventDefault();
     window.history.pushState({}, "", event.target.href);
     urlLocationHandler();
 }
 const urlLocationHandler = async () => {
-    console.log('urlLocationHandler')
     let location = window.location.pathname;
     if (location === "/" || location === "/homepage") {
         location = "/feed";
     }
     const route = urlRoutes[location] || urlRoutes[404];
-    const html = await fetch(route.template).then((response) => response.text());
+    const html = await fetch(route.template).then(async (response) => response.text());
     document.getElementById("content").innerHTML = html;
     if (route.template === "./public/feed.html") {
         getPosts()
@@ -87,6 +85,7 @@ function likePostEvent(e, postDiv) {
 }
 
 function getPosts() {
+    getAllUser();
     const loginUserId = localStorage.getItem("userId");
  getAllPostServices()
  .then(res => {
@@ -220,6 +219,7 @@ function getProfilePhoto() {
         })
     })
 }
+
 function getUserName() {
     const loginUserId = localStorage.getItem("userId");
  getUserByIdServices(loginUserId).then((res) => {

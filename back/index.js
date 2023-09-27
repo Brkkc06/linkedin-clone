@@ -122,9 +122,9 @@ app.post("/login", (req, response) => {
         }
     })
 })
-app.post("/get-user-2", (req, res) => {
-    UserModel.find({ _id: req.body._id, }).exec().then(result => {
-    })
+app.get("/getAllUser",async (req,res) =>{
+    const result = await UserModel.find({});
+    res.send({users:result})
 })
 app.get("/getAll", async (req, res) => {
     const result = await PostModel.find({});
