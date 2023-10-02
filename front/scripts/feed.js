@@ -21,6 +21,10 @@ function getAllUser() {
         const userDepartment = user.department;
         const userInfo = userCompany + '<br>' +   userDepartment;
         const userProfilePhoto = user.profilePhoto;
+        const userFollowers = user.followers;
+        if(Array.from(userFollowers).includes(loginUserId)){
+                     
+        }
         Array.from(nameDiv)[index].innerHTML = userFullName;
         // default olarak db de fotoğraf olması lazım ekle !
         if (!userProfilePhoto) {
@@ -39,7 +43,6 @@ function getAllUser() {
 function follow(event){
   const loginUserId = localStorage.getItem("userId");
   const accessKey = event.target.accessKey;
-  console.log(accessKey)
   addFollowerServices(loginUserId,accessKey)
   .then((res) => res.text())
   .then(async (res) => {
